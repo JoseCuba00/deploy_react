@@ -1,0 +1,555 @@
+.img_message{
+	width:25px;
+	
+	margin-right: 15px;
+  
+    transition: transform .2s;
+}
+.img_message:hover {
+    animation: wave 0.6s ease-in-out;
+    transform-origin: bottom center; /* Cambia el origen de la transformación */
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(1.1) translate(0, 0);
+    }
+    50% {
+        transform: scale(1.1) translate(-5px, 5px);
+    }
+    100% {
+        transform: scale(1.1) translate(0, 0);
+    }
+}
+.card{
+	cursor: pointer;
+	transition: box-shadow .4s;
+
+}
+.card:hover{
+	box-shadow: 0px 0px 25px 19px rgb(0 0 200 / 5%);
+}
+
+body {
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+  }
+  
+  html {
+	height: -webkit-fill-available;
+  }
+  .flex-shrink-0{
+	width: 380px;
+	
+}
+  
+  main {
+	display: flex;
+	flex-wrap: nowrap;
+	height: 100vh;
+	height: -webkit-fill-available;
+	max-height: 100vh;
+	overflow-x: auto;
+	overflow-y: hidden;
+	
+  }
+  
+  .b-example-divider {
+	flex-shrink: 0;
+	width: 1.5rem;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .1);
+	border: solid rgba(0, 0, 0, .15);
+	border-width: 1px 0;
+	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  }
+  
+  .bi {
+	vertical-align: -.125em;
+	pointer-events: none;
+	fill: currentColor;
+  }
+  
+  .dropdown-toggle { outline: 0; }
+  
+  .nav-flush .nav-link {
+	border-radius: 0;
+  }
+  
+  .btn-toggle {
+	display: inline-flex;
+	align-items: center;
+	padding: .25rem .5rem;
+	font-weight: 600;
+	color: rgba(0, 0, 0, .65);
+	background-color: transparent;
+	border: 0;
+  }
+  .btn-toggle:hover,
+  .btn-toggle:focus {
+	color: rgba(0, 0, 0, .85);
+	background-color: #d2f4ea;
+  }
+  
+  .btn-toggle::before {
+	width: 1.25em;
+	line-height: 0;
+	content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+	transition: transform .35s ease;
+	transform-origin: .5em 50%;
+  }
+  
+  .btn-toggle[aria-expanded="true"] {
+	color: rgba(0, 0, 0, .85);
+  }
+  .btn-toggle[aria-expanded="true"]::before {
+	transform: rotate(90deg);
+  }
+  
+  .btn-toggle-nav a {
+	display: inline-flex;
+	padding: .1875rem .5rem;
+	margin-top: .125rem;
+	margin-left: 1.25rem;
+	text-decoration: none;
+  }
+
+  
+  .scrollarea {
+	overflow-y: auto;
+  }
+  
+  .fw-semibold { font-weight: 600; }
+  .lh-tight { line-height: 1.25; }
+
+.link-dark{
+	color: black;
+}
+.assignments {
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.assignments:before, .assignments:after {
+    position: absolute;
+    content: '';
+    border-bottom: 1px solid rgb(0, 99, 228);
+    border-radius: 1em;
+    bottom: .3em;
+    transition: transform 0s cubic-bezier(0.075, 0.82, 0.165, 1), width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    width: 0;
+}
+
+.assignments:before {
+    left: 50%;
+}
+
+.assignments:after {
+    right: 50%;
+}
+
+.assignments:hover:before, .assignments:hover:after {
+    transition: transform 0.5s ease, width 0.5s ease;
+}
+
+.assignments:hover:before {
+    transform: scaleX(1);
+    width: 50%;
+}
+
+.assignments:hover:after {
+    transform: scaleX(1);
+    width: 50%;
+}
+.scrollable-menu {
+	padding-left: 15px;
+	overflow-y: scroll;
+	direction: ltr;
+	width: 257px;
+	height: 100vh; /* Ajusta este valor según tus necesidades */
+	
+}
+.scrollable-menu::-webkit-scrollbar {
+	
+	width: 10px;
+  }
+.scrollable-menu::-webkit-scrollbar-track {
+	background-color: #e4e4e4;
+	border-radius: 100px;
+  }
+.scrollable-menu::-webkit-scrollbar-thumb {
+	border-radius: 100px;
+	background-color: gray
+	
+  }
+.content{
+	position: fixed;
+}
+.boton-draggable{
+	padding: 4px;
+  font-size: smaller;
+  font-weight: 600;
+	background-color: rgb(167, 185, 219);
+	
+	width: 120px;
+}
+.boton-draggable:hover{
+	cursor: grab !important
+}
+.object{
+	height: 100vh;
+}
+.sentences{
+	display: grid;
+    align-content: center;
+	
+}
+.btn-check{
+	visibility: hidden;
+}
+label {
+    cursor: pointer;
+}
+input[type="radio"].btn-check:checked + label {
+    background-color: rgb(157, 165, 199);
+	
+}
+.sentencesSelect{
+	padding-left: 4px;
+}
+.asd{
+	font-size: 0;
+}
+.btn-light{
+	height: 65% !important;
+		padding: 0.15rem 0.6rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		border-radius: .2rem;
+}
+.btn-check{
+	display:none
+}
+#dropdown-basic {
+    color: black; 
+    background-color: #f8f9fa;
+     border-color: #f8f9fa;
+	 height: 65% !important;
+	 padding: 0.25rem 0.6rem;
+	 font-size: 0.875rem;
+	 line-height: 0;
+	 border-radius: .2rem;
+}
+.dropdown-toggle::after {
+	margin-left: 0.655em;}
+
+.fixed-width-toggle {
+		width: 140px; /* Aquí puedes ajustar el ancho fijo deseado */
+	}
+.oraciones {
+		width: 897px; /* Ajusta este valor según tus necesidades */
+		 /* Permite romper palabras largas si es necesario */
+		white-space: normal; /* Asegura que el texto se ajuste a la caja, permitiendo saltos de línea */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+.sentence-part {
+		display: inline-block;
+	}
+	
+
+.texto {
+    display: inline;
+    white-space: normal; /* Permite la división de texto en múltiples líneas */
+	
+	
+}
+.cuadrado{
+	width: 257px;
+	border: 1px solid black;
+	word-wrap: break-all;
+	
+	
+}
+
+.cuadrado {
+    width: 250px;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.caja{
+	position: sticky;
+}
+.dropContainer{
+	padding-top: 6px;
+    display: inline-grid;
+    width: 80px;
+    justify-items: center;}
+
+
+	  
+.QuestionsContainer {
+		
+		display: flex;
+		flex: 1; /* El div ocupará todo el espacio restante */
+    justify-content: center;
+    align-items: center;
+
+	  }
+.text{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 900px;
+	padding-bottom: 250px;
+}
+
+.droppable-zone-main {
+	position: absolute;
+	right: 0;
+	top: 110px;
+	bottom: 0;
+	width: auto;
+  }
+  
+  .droppable-zone-sentence-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin-left: auto;
+	margin-right: auto;
+  }
+
+.squareChild{
+	border: 1px solid black;
+	
+	width: 20px;
+	padding-left: 5px;
+	cursor: pointer;
+}
+.squareFather{
+	padding-right: 5px;
+}
+.img_answer{
+    width: 21px;
+    height: 23px;
+    display: inline-block;
+    margin-right: 10px;
+    
+
+}
+.alert-popup {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.squareChild {
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+	border-radius: 5px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.squareChild:hover {
+    transform: scale(1.1);
+}
+
+.squareChild.selected {
+    border: 2px solid white;
+    position: relative;
+}
+
+.navHeaderFont {
+	font-size: 1.30rem;
+	color: white;
+  }
+body{
+	background-color: rgb(250,250,250);
+	font-family: Manrope !important
+}
+.iconStyle{
+	height: 55px;
+	
+	border-radius: 3px;
+	border: 1px solid transparent;
+	
+}
+.img_modul{
+
+    width: 52px;
+    height: 53px;
+    display: inline-block;
+    padding: 8px;
+}
+.boton-quiz{
+	border: 1px solid rgb(153, 143, 156);
+    background-color: rgb(250,250,250);
+    padding: 4px;
+    border-radius: 7px;
+    width: 500px;
+    display: flex;
+    justify-content: flex-start;
+}
+.boton-quiz:hover{
+	cursor:pointer !important;
+	background-color: rgb(167, 185, 219)
+}
+
+input[type="radio"].radio-quiz {
+  flex-shrink: 0; /* Evita que el input radio cambie de tamaño */
+}
+
+
+
+input[type="checkbox"] {
+    width: 20px; /* Ajusta el tamaño según tus necesidades */
+    height: 20px; /* Ajusta el tamaño según tus necesidades */
+    
+}
+
+
+
+/* Cambiar el color del radio button cuando está seleccionado */
+input[type="radio"].radio-quiz {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgb(93, 93, 96);
+    margin-right: 10px;
+    position: relative;
+    background-color: transparent;
+}
+
+input[type="radio"].radio-quiz:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+	display: block;
+	top: 2.9px;
+    left: 3.6px;
+}
+
+.boton-quiz.selected {
+    background-color: rgb(167, 185, 219)
+}
+.selected input[type="radio"].radio-quiz {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-right: 10px;
+    position: relative;
+    background-color: transparent;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgb(93, 93, 96);
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.285 6.708l-1.536-1.509L9 14.153 5.25 10.442 3.714 11.951 9 17.292z"/></svg>');
+  background-size: 20px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.boton-quiz.selected input[type="checkbox"] {
+  border: 2px solid white;
+}
+
+.isDisabled {
+  background-color: rgb(157, 165, 199)
+}
+.select-quiz{
+  background-color: #e0eff1;
+  font-style: italic !important;
+  border-radius: 5px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 6px;
+  display: flex;
+  justify-content: center;
+  font-size: .88rem;
+  font-weight: 600;
+}
+.click-quiz{
+  background-color: rgb(167, 185, 219);
+  border-radius: 5px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 6px;
+  display: flex;
+  justify-content: center;
+  font-size: .88rem;
+  font-weight: 600;
+}
+.click-quiz-main{
+  padding-top: 20px;
+}
+.click-quiz-sentences{
+  position: relative;
+  display: flex;
+  width: 900px;
+  height: 100px;
+  border: 1px solid #8c8c8c;
+  flex-wrap: wrap;
+  border-left: 0px;
+  border-right: 0px;
+}
+.click-quiz-words{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(245,245,245);
+  border-radius: 20px;
+  width: 900px;
+  height:100px;
+  padding: 22px;
+
+
+}
