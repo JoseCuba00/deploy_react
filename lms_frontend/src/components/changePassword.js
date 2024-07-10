@@ -1,9 +1,9 @@
-import React, {useContext,useState} from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 
-function ChangePassword() { 
+function ChangePassword() {
 
     const { user } = useContext(AuthContext)
     const [passwordMatch, setPasswordMatch] = useState(true)
@@ -12,52 +12,53 @@ function ChangePassword() {
     const successAlert = () => {
         navigate('/')
         const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert-popup';
+        alertDiv.className = 'alert-popup-success';
         alertDiv.textContent = '✓ Contraseña ha sido cambiada con éxito';
         document.body.appendChild(alertDiv);
-    
+
         setTimeout(() => {
             document.body.removeChild(alertDiv);
-           // Reemplaza '/otra-pagina' con la ruta a la que deseas redirigir
+            // Reemplaza '/otra-pagina' con la ruta a la que deseas redirigir
         }, 3000);
     }
 
     const update_password = async (e) => {
         setPasswordMatch(true)
         e.preventDefault()
-        if (e.target[0].value === e.target[1].value){
+        if (e.target[0].value === e.target[1].value) {
             await axios
-            .put( `http://127.0.0.1:8000/account/change_password/${user.user_id}`, {
-                password: e.target[0].value
-            })
-            .then(async (response) => {
-                successAlert()
-            })
-            .catch(async (err) => {
-                console.log(err);
-            })}
-            else{
-                setPasswordMatch(false)
-            }
+                .put(`http://127.0.0.1:8000/account/change_password/${user.user_id}`, {
+                    password: e.target[0].value
+                })
+                .then(async (response) => {
+                    successAlert()
+                })
+                .catch(async (err) => {
+                    console.log(err);
+                })
         }
-        const showPassword = () => {
-            var passwordInputs = document.querySelectorAll('input[type=password]');
-            var textInputs = document.querySelectorAll('input[type=text]');
-          
-            var inputs = [...passwordInputs, ...textInputs];
-          
-            inputs.forEach((input) => {
-              if (input.type === "password") {
+        else {
+            setPasswordMatch(false)
+        }
+    }
+    const showPassword = () => {
+        var passwordInputs = document.querySelectorAll('input[type=password]');
+        var textInputs = document.querySelectorAll('input[type=text]');
+
+        var inputs = [...passwordInputs, ...textInputs];
+
+        inputs.forEach((input) => {
+            if (input.type === "password") {
                 input.type = "text";
-              } else {
+            } else {
                 input.type = "password";
-              }
-            });
-          }
-          
-        return (
+            }
+        });
+    }
+
+    return (
         <div className="container mt-4 justify-content-sm-center">
-            
+
             <div className="row">
                 <div className="col-6 offset-3">
                     <div className="card">
@@ -70,11 +71,13 @@ function ChangePassword() {
                                 <div className="mb-3">
                                     <label for='InputPassword2' className="form-label">Confirm password</label>
                                     <input type='password' className="form-control" id='InputPassword1'></input>
-                                    <input type="checkbox" id='showPassword' onClick={()=>showPassword()}></input>
-                                    <label for='showPassword' className="form-label pl-2">Show password</label>
-                                    
                                 </div>
-                                
+                                <div>
+                                    <input type="checkbox" id='showPassword' onClick={() => showPassword()}></input>
+                                    <label for='showPassword' className="form-label ps-2">Show password</label>
+                                </div>
+
+
                                 {!passwordMatch && <p className="text-danger">Las contraseñas no son iguales</p>}
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </form>
@@ -83,7 +86,7 @@ function ChangePassword() {
                 </div>
             </div>
         </div>
-     
+
     );
 }
 

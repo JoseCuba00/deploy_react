@@ -18,18 +18,19 @@ const CheckBoxQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
 
     useEffect(() => {
         if (isCompleted) {
-            // Esperar a que el componente se monte y los inputs de radio estén disponibles en el DOM
+            
             setSelectedCheckboxes(answers.map(answer=>({id:answer})))
             SetShowResult(true);
             setCompleted(true);
             setLoading(false);
         }
-    }, [isCompleted, choices]);
+    }, [isCompleted, choices,answers]);
 
-    const onAnswerClick = useCallback((choice, id) => {
+    const onAnswerClick = (choice, id) => {
+        console.log(id)
         setSelectedCheckboxes(prevSelectedCheckboxes => {
             const isAlreadySelected = prevSelectedCheckboxes.some(item => item.id === id);
-
+            console.log(isAlreadySelected)
             if (isAlreadySelected) {
                 return prevSelectedCheckboxes.filter(item => item.id !== id); // Si el elemento ya exite "lo elimina"
             }
@@ -37,7 +38,7 @@ const CheckBoxQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
             const newCorrectAnswer = answers.find(answer => answer === id) ? true : false // comprueba si el elemento esta en la respuesta  
             return [...prevSelectedCheckboxes, { id, IsCorrect: newCorrectAnswer }]; // si el elemento no existe lo agriega 
         });
-    }, [])
+    }
 
     const onClickSubmit = () => {
         let score = 0
@@ -63,14 +64,15 @@ const CheckBoxQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
     const onClickNext = useCallback(() => {
 
         setCurrentQuestion(prevQuestion => prevQuestion + 1);
-    }, []);
+    }, [setCurrentQuestion]);
+
     const onClickReset = useCallback(() => {
         document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false); // Para deseleccionar los inputs 
         setSelectedCheckboxes([])
         SetShowResult(false);
         setShuffledChoices(shuffleArray(choices))
         setCompleted(false)
-    }, []);
+    }, [choices,shuffleArray]);
 
     useEffect(() => {
         if (shuffledChoices.length > 0) {
@@ -78,6 +80,7 @@ const CheckBoxQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
         }
     }, [shuffledChoices]);
 
+    console.log(selectedCheckboxes)
     return (
 
 

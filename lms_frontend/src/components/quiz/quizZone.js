@@ -4,7 +4,7 @@ import { convertToSpeech } from '../actions/actions'
 const QuizZone = (props) => {
     //convertToSpeech(choice.title);
     return (
-        <div >
+        <div className='ps-4' >
             <div className="d-flex flex-column">
                 <h4>Select the correct answer</h4>
 
@@ -26,9 +26,13 @@ const QuizZone = (props) => {
                                 <div className='pb-2'>
 
                                     <div
-                                        className={` ps-2 form-check boton-quiz ${props.selectedAnswer === choice.id ? 'selected' : ''}`}
+                                        className={` ps-2 form-check boton-quiz  ${props.selectedAnswer === choice.id ? `selected ${props.disabled && 'isDisabled'}` : ''
+                                        }`
+                                        
+                                    }
                                         key={choice.id}
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            console.log(e)
                                             if (!props.disabled) {
                                                 props.onAnswerClick(choice.id);
                                                 document.getElementById(`radio-${choice.id}`).click();
@@ -36,7 +40,7 @@ const QuizZone = (props) => {
                                             }
                                         }}
                                     >
-                                        {console.log(choice.id)}
+                                        
                                         <input
 
                                             key={choice.id}

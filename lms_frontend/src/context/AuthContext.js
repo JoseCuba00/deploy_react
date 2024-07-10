@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(jwtDecode(data.access))
                 setUserFound(true)
                 navigate('/')
+               
             } else {
                 alert('Something went wrong while loggin in the user!')
             }
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     let logoutUser = (e) => {
-        //e.preventDefault
+        e.preventDefault();
         localStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)

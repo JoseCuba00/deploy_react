@@ -161,7 +161,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION', # indica que Authorization es el nombre del authorization header name
     'USER_ID_FIELD': 'id', # El campo de la base de datos que se incluira en los token para identificar al usuario 
-    'USER_ID_CLAIM': 'user_id', # Para que en el token se incluya el user_id
+    'USER_ID_CLAIM': 'id', # Para que en el token se incluya el user_id
     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',# Lo que verifica si a un usuario todavia se le permite autenticarse 
 
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
@@ -180,3 +180,11 @@ import os
 
 # Añadir la variable de entorno para las credenciales de Google Cloud
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(BASE_DIR, 'key.json')
+
+#Permitir heredar la clase Users
+AUTH_USER_MODEL = "main.Students"
+
+MEDIA_URL = '/media/' # Para poder cargar las imagenes desde el navegador
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Hacia donde van a ir los archivos media
+

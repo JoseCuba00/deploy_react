@@ -4,11 +4,11 @@ import { convertToSpeech } from '../actions/actions'
 const ClickToRowZone = (props) => {
     //convertToSpeech(word.title);
     return (
-        <div className={`${props.id === 'row2' && 'click-quiz-main'} `} >
+        <div className={`${props.id === 'row2' && 'click-quiz-main'} ps-4`} >
 
             <Droppable droppableId={props.id} direction="horizontal">
                 {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps} className={`${props.id === 'row1' ? 'click-quiz-sentences' : 'click-quiz-words'} `}>
+                    <div ref={provided.innerRef} {...provided.droppableProps} className={`${props.id === 'row1' ? 'click-quiz-sentences ' : 'click-quiz-words'} `}>
                         {props.id === 'row1' && 
                         <div
                             style={{
@@ -37,7 +37,7 @@ const ClickToRowZone = (props) => {
                                             }
                                         }}
                                         style={{ padding: '8px', margin: '4px', cursor: 'pointer', height: '40px' }}
-                                        className='click-quiz'
+                                        className={`click-quiz ${props.disabled && 'isDisabled'}`}
                                         isDragDisabled={props.disabled}
 
                                     >

@@ -4,12 +4,13 @@ import { DroppableZoneMain, DroppableZoneSentence } from './drapDropZone'
 import { ChangeData } from '../actions/actions'
 import { QuizBottons } from '../quizBottons';
 
-const DragDropQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shuffleArray, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id }) => {
-    const initializeShuffledChoices = () => {
+const DragDropQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shuffleArray, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id,isText }) => {
+    
+    const initializeShuffledChoices = useCallback(() => {
         let defaultObjects = sentencesList.map(() => ([]));
         defaultObjects.splice(0, 0, JSON.parse(JSON.stringify(shuffleArray(choices))));
         return defaultObjects;
-    };
+    },[sentencesList,choices,shuffleArray])
 
     const [showResult, setShowResult] = useState(false);
     const [shuffledChoices, setShuffledChoices] = useState(initializeShuffledChoices);
@@ -57,12 +58,32 @@ const DragDropQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
 
     const onClickSubmit = async () => {
         let score = 0;
-        const updatedChoices = shuffledChoices.map((obj, index) => {
-            if (index === 0) return obj;
-            const isCorrect = obj[0].id === answers[index - 1];
-            if (isCorrect) score++;
-            return [{ ...obj[0], isCorrect }];
-        });
+        let updatedChoices
+        try{
+            updatedChoices = shuffledChoices.map((obj, index) => {
+                if (index === 0) return obj;
+                let isCorrect = obj[0].id === answers[index - 1];
+                
+                if (isCorrect) score++;
+                return [{ ...obj[0], isCorrect }];
+            });
+        }
+        catch{
+               const successAlert = () => {
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert-popup';
+            alertDiv.textContent = 'You have to fill all the empty spaces';
+            document.body.appendChild(alertDiv);
+        
+            setTimeout(() => {
+                document.body.removeChild(alertDiv);
+               // Reemplaza '/otra-pagina' con la ruta a la que deseas redirigir
+            }, 3000);
+        }
+        return successAlert()
+        }
+
 
         setShuffledChoices(updatedChoices);
 
@@ -104,6 +125,7 @@ const DragDropQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
                                     list={sentencesList}
                                     objects={shuffledChoices}
                                     disabled={showResult}
+                                    isText={isText}
                                 />
                             <DroppableZoneMain id={'0'} objects={shuffledChoices[0]} />
                             </div>

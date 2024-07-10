@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import redirect
-from .serializers import StudentSerializer, ModuleSerializer,TopicsSerializer,QuestionsSerializer,AssignmentsSerializer,AssignmentsSerializerUpdate,QuestionsSerializerUpdate,ChangePasswordSerializer
+from .serializers import StudentsSerializer, ModuleSerializer,TopicsSerializer,QuestionsSerializer,AssignmentsSerializer,AssignmentsSerializerUpdate,QuestionsSerializerUpdate,ChangePasswordSerializer,StudentsSerializerUpdate
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import mixins
@@ -13,8 +13,12 @@ from google.cloud import texttospeech
 import logging
 from rest_framework import generics
 from django.http import Http404
-from .models import Student, Module, Topics, Questions,Assignments
+from .models import Students, Module, Topics, Questions,Assignments
 from django.contrib.auth.models import User
+from rest_framework import status, views
+from rest_framework.parsers import MultiPartParser, FormParser
+
+
 
 
 logger = logging.getLogger(__name__)
@@ -24,15 +28,15 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
     
-class StudentList(generics.ListCreateAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+class StudentsList(generics.ListCreateAPIView):
+    queryset = Students.objects.all()
+    serializer_class = StudentsSerializer
     #permission_classes = [permissions.IsAuthenticated] # Solo mostrará los datos si se esta logeado como admin
 
 
-class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+class StudentsDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Students.objects.all()
+    serializer_class = StudentsSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
 
@@ -98,5 +102,16 @@ def convert_text_to_speech(request):
 
 class ChangePasswordView(generics.UpdateAPIView):
 
-    queryset = User.objects.all()
+    queryset = Students.objects.all()
     serializer_class = ChangePasswordSerializer
+
+class ProfileImageView(generics.ListCreateAPIView):
+    serializer_class = StudentsSerializer
+    def get_queryset(self):
+        pk = self.kwargs['student']
+        return Students.objects.filter(id=pk)
+   
+
+class ProfileImageViewUpdate(generics.UpdateAPIView):
+    queryset = Students.objects.all()
+    serializer_class = StudentsSerializerUpdate

@@ -3,7 +3,7 @@ import DropdownZone from './dropDownZone'
 import { ChangeData } from '../actions/actions'
 import { QuizBottons } from '../quizBottons';
 
-const DropDownQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shuffleArray, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id }) => {
+const DropDownQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shuffleArray, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id,isText }) => {
 
     const titles = sentencesList.map(() => ({ title: 'Select an item' })) // genera el array donde se van a guardar los titulos 
     const [dropDownValue, SetdropDownValue] = useState(titles)
@@ -74,13 +74,14 @@ const DropDownQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, shu
             <div className='text'>
                 {loading ? (
                     <p>Loading</p> // Muestra el símbolo de carga
-                ) : (<div>
+                ) : (<div className='container'>
                     <DropdownZone
                         sentencesList={sentencesList}
                         title={dropDownValue}
                         objects={shuffledChoices}
                         clickFunction={changeValue}
-                        disabled={ShowResult}                        
+                        disabled={ShowResult} 
+                        isText={isText}                       
                     />
                     < QuizBottons
                         buttonName={ShowResult ? (completed ? 'Solve again' : 'Try again') : 'Submit'}

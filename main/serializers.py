@@ -22,30 +22,16 @@ class AssignmentsSerializerUpdate(serializers.ModelSerializer):
         fields = ['id','completed']
 
 
-class StudentSerializer(serializers.ModelSerializer):
+class StudentsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Student
-        fields = ['id','full_name', 'email', 'password', 'phone_number', 'address']
+        model = models.Students
+        fields = ['username','email','phone_number','profile_image']
 
-class ModuleSerializer(serializers.ModelSerializer):
-    first_id = serializers.SerializerMethodField()  
+class StudentsSerializerUpdate(serializers.ModelSerializer):
     class Meta:
-        model = models.Module
-        fields = ['id','title','description','first_id']
+        model = models.Students
+        fields = ['profile_image']
 
-    def get_first_id(self, obj):
-        first_topic = obj.module.first()  # Obtiene el primer tópico del módulo
-        if first_topic:
-            first_assignment = first_topic.assignments.first()  # Obtiene el primer assignment del tópico
-            if first_assignment:
-                return first_assignment.id
-        return None
-    
-    def check_user(self,clean_data):
-        user = authenticate(username=clean_data['email'],password= clean_data['password'])
-
-        if not user:
-            raise ValidationError('no encontrado')
 
 
 class TopicsSerializer(serializers.ModelSerializer):
@@ -54,6 +40,28 @@ class TopicsSerializer(serializers.ModelSerializer):
         model = models.Topics
         fields = ['id','title','assignments']
 
+class ModuleSerializer(serializers.ModelSerializer):
+    first_id = serializers.SerializerMethodField()  
+    module = TopicsSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.Module
+        fields = ['id','title','description','first_id','module']
+
+    def get_first_id(self, obj):
+        first_topic = obj.module.first()  # Obtiene el primer topic del módulo
+        if first_topic:
+            first_assignment = first_topic.assignments.first()  # Obtiene el primer assignment del topic
+            if first_assignment:
+                return first_assignment.id
+        return None
+    
+    
+    def check_user(self,clean_data):
+        user = authenticate(username=clean_data['email'],password= clean_data['password'])
+
+        if not user:
+            raise ValidationError('no encontrado')
+        
 class ChoicesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Choices
@@ -79,13 +87,16 @@ class QuestionsSerializerUpdate(serializers.ModelSerializer):
         model = models.Questions
         fields = ['id','completed']
 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer): # Para que en el token este en username
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['username'] = user.username
+        token['id'] = user.id
         return token
     
+
 class ChangePasswordSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, )
     class Meta:

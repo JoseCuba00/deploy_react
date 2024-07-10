@@ -6,7 +6,7 @@ function Login() { // Esto es un componente, es un pedazo de UI , es como un div
 
     let {loginUser,userFound} = useContext(AuthContext)
         return (
-        <div className="container mt-4 justify-content-sm-center">
+        <div className="container mt-4 justify-content-sm-center pt-5">
             <div className="row">
                 <div className="col-6 offset-3">
                     <div className="card">
@@ -22,23 +22,14 @@ function Login() { // Esto es un componente, es un pedazo de UI , es como un div
                                     <label for='exampleInputPassword1' className="form-label">Password</label>
                                     <input type='password' className="form-control" id='exampleInputPassword1'></input>
                                 </div>
-                                <div className="mb-3 form-check">
-                                    <input type='checkbox' className="form-check-control" id='exampleCheck1'></input>
-                                    <label for='exampleCheck1' className="form-check-control">Remember Me</label>
-                                </div>
+
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </form>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-     
     );
 }
 

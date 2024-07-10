@@ -49,7 +49,7 @@ function Quiz() {
                     assignmentsRes.json(),
                     moduleRes.json()
                 ]);
-
+                console.log(moduleData)
                 setQuestionData(assignmentsData);
                 setTopicData(moduleData);
             } catch (error) {
@@ -66,11 +66,11 @@ function Quiz() {
         return <div>Loading...</div>;
     }
 
-    let answer, choices, sentences, title, type, id, completed
+    let answer, choices, sentences, title, type, id, completed,isText
     try {
         const currentQuestionData = questionData[currentQuestion];
         if (currentQuestionData) {
-            ({ answer, choices, completed, id, sentences, title, type } = currentQuestionData);
+            ({ answer, choices, completed, id, sentences, title, type,isText } = currentQuestionData);
         } else {
             throw new Error("Question data not found");
         }
@@ -148,7 +148,7 @@ function Quiz() {
                                                 onClick={ handleClick}
                                                 id = {index + 1}
                                                 style={GetBorder(index + 1, obj)}
-                                                className={`squareChild ${currentQuestion === index ? 'selected' : ''}`}
+                                                className='squareChild'
                                             >
                                                 {currentQuestion === index ? index + 1:obj.completed? '✓':index +1}
                                             </div>
@@ -180,6 +180,7 @@ function Quiz() {
                     isCompleted={completed}
                     setTopicData={setTopicData}
                     assignments_id={assignments_id}
+                    isText={isText}
                 />
             </div>
         </div>

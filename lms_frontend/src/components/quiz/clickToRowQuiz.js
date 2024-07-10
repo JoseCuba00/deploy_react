@@ -80,8 +80,8 @@ const ClickToRowQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, s
                         <p>Loading</p> // Muestra el símbolo de carga
                     ) : (
                         <DragDropContext  >
-                            <h4 className='pb-3 pt-5'>Select the correct answer</h4>
-                            <div className='pb-4'>
+                            <h4 className='pb-3 pt-5 ps-4'>Translate the following sentence</h4>
+                            <div className='pb-4 ps-4'>
                                 {sentencesList[0].title}
                             </div>
                             <ClickToRowZone

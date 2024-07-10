@@ -3,9 +3,9 @@ import { convertToSpeech } from '../actions/actions'
 
 const CheckBoxZone = (props) => {
     //convertToSpeech(choice.title)
-  
-    return(
-        <div className="d-flex flex-column" >
+
+    return (
+        <div className="d-flex flex-column ps-4" >
             <h4>Select all the correct answers</h4>
 
             <h6 className='d-flex align-items-center' style={{ 'font-weight': '400' }}>
@@ -26,18 +26,21 @@ const CheckBoxZone = (props) => {
                         return (
                             <div className='pb-2'>
                                 <div
-                                    className={`ps-2 form-check boton-quiz ${isSelected ? 'selected' : ''}`}
+                                    className={`ps-2 form-check boton-quiz ${isSelected && `selected ${props.disabled && 'isDisabled'}`}`}
                                     key={choice.id}
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        console.log(e)
                                         if (!props.disabled) {
-                                        props.onAnswerClick(choice, choice.id)
+                                            props.onAnswerClick(choice, choice.id)
+                                         
                                         }
                                     }}
                                 >
                                     <input
                                         key={choice.id}
+                                        className="checkbox-quiz"
                                         type="checkbox"
-                                        id={choice.id}
+                                        id={`checkbox-${choice.id}`}
                                         name="flexCheckboxDefault"
                                         disabled={props.disabled}
                                         checked={isSelected ? true : false}
@@ -45,16 +48,13 @@ const CheckBoxZone = (props) => {
                                     <label
                                         className="form-check-label"
                                         style={{ 'font-weight': '600', 'padding-left': '40px' }}
-                                        htmlFor={choice.id}
+                                        
                                     >
                                         {choice.title}
                                     </label>
-
                                 </div>
                             </div>
                         )
-
-
                     })
                 }
             </div>

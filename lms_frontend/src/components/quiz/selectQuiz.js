@@ -6,8 +6,9 @@ import { QuizBottons } from '../quizBottons';
 const useSelected = () => {
   const [selected, setSelected] = useState([]);
   const updateSelected = useCallback((box, obj, answers) => {
+    
     setSelected(prev => {
-      console.log(obj)
+      
       let isCorrect = obj.id === answers[box]
       const newSelected = [...prev]; // Crear un nuevo array en lugar de mutar el estado directamente
       newSelected[box] = { id: obj.id, isCorrect: isCorrect };
@@ -17,10 +18,10 @@ const useSelected = () => {
   const resetSelected = useCallback(() => {
     setSelected([]); // Restablecer el estado a un array vacío
   }, []);
-  return [selected, updateSelected, resetSelected];
+  return [selected,setSelected ,updateSelected, resetSelected];
 };
 
-const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id }) => {
+const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, questionId, setQuestionData, isCompleted, currentQuestion, totalQuestions, setTopicData, assignments_id,isText }) => {
   const chunkSize = 3;
 
   // Memoizar la transformación de choices para evitar cálculos innecesarios
@@ -33,24 +34,14 @@ const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, quest
   }, [choices]);
 
   const [showResult, setShowResult] = useState(false);
-  const [selected, updateSelected, resetSelected] = useSelected();
+  const [selected,setSelected ,updateSelected, resetSelected] = useSelected();
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (isCompleted) {
       // Esperar a que el componente se monte y los inputs de radio estén disponibles en el DOM
-      setTimeout(() => {
-        answers.map((answer, index) => {
-          document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            if (Number(radio.id) === answer) {
-              console.log(radio.id)
-              radio.checked = true
-            }
-          });
-        })
-
-      }, 0);
+      setSelected(answers.map(answer=>({id:answer})))
       setShowResult(true);
       setCompleted(true);
       setLoading(false);
@@ -58,7 +49,7 @@ const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, quest
   }, [isCompleted]);
 
   const onAnswerClick = useCallback((box, obj) => {
-    console.log('input cliceado')
+   
     updateSelected(box, obj, answers);
     console.log(selected);
   }, [selected, updateSelected, answers]);
@@ -93,7 +84,7 @@ const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, quest
       setLoading(false);
     }
   }, [choicesTransform]);
-
+console.log(selected)
   return (
     <div className='QuestionsContainer'>
       <div className='text'>
@@ -105,9 +96,10 @@ const SelectQuiz = ({ sentencesList, choices, answers, setCurrentQuestion, quest
               objects={choicesTransform}
               ClickFunction={onAnswerClick}
               list={sentencesList}
-              selectedChoices={showResult ? selected : []}
+              selectedChoices={ selected }
               disabled={showResult}
               answers={answers}
+              isText={isText}
              
             />
             < QuizBottons
