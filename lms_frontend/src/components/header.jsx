@@ -86,7 +86,7 @@ function Header() {
                 className="pe-2"
                 style={{ fontSize: "1.30rem", userSelect: "none" }}
               >
-                Hola {user.username}{" "}
+                Hola{" "}
               </span>
             </div>
             <div>
