@@ -1,14 +1,18 @@
-import { Navigate } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../context/AuthContext';
-import {jwtDecode }from 'jwt-decode'; // Import correctly without destructuring
+import { Navigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import AuthContext from "../context/AuthContext";
+import { jwtDecode } from "jwt-decode"; // Import correctly without destructuring
 
-import axios from "axios"
+import axios from "axios";
 
 const PrivateRoute = ({ children }) => {
   const [isAuthorized, setIsAuthorized] = useState([]); // Use correct camelCase for setState function
   //const { authTokens, setAuthTokens } = useContext(AuthContext); // Destructure from AuthContext
-  let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))
+  let [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
 
   useEffect(() => {
     const authenticate = async () => {
@@ -23,37 +27,34 @@ const PrivateRoute = ({ children }) => {
 
   const refreshToken = async () => {
     try {
-        const api = axios.create({
-            baseURL:'http://127.0.0.1:8000'
-         })
-         
-         api.interceptors.request.use(
-             
-             (config)=>{
-                 
-                 if (authTokens){
-                     config.headers.Authorization = `Bearer ${authTokens.access}`
-                 }
-                 return config 
-             },
-             (error)=>{
-                 return Promise.reject(error)
-             }
-         
-        )
+      const api = axios.create({
+        baseURL: "http://127.0.0.1:8000",
+      });
+
+      api.interceptors.request.use(
+        (config) => {
+          if (authTokens) {
+            config.headers.Authorization = `Bearer ${authTokens.access}`;
+          }
+          return config;
+        },
+        (error) => {
+          return Promise.reject(error);
+        }
+      );
       const res = await api.post("/token/refresh/", {
-        refresh: authTokens.refresh
+        refresh: authTokens.refresh,
       });
       if (res.status === 200) {
         setAuthTokens(res.data); // Update context
-        console.log(res.data)
-        localStorage.setItem('authTokens', JSON.stringify(res.data)); // Store as a string
+        console.log(res.data);
+        localStorage.setItem("authTokens", JSON.stringify(res.data)); // Store as a string
         setIsAuthorized(true);
       } else {
-        setIsAuthorized(false); 
+        setIsAuthorized(false);
       }
     } catch (error) {
-      console.log('Failed to refresh token', error);
+      console.log("Failed to refresh token", error);
       setIsAuthorized(false);
     }
   };
@@ -73,7 +74,7 @@ const PrivateRoute = ({ children }) => {
     }
   };
 
-  return isAuthorized ? children : <Navigate to='/login' />;
-}
+  return isAuthorized ? children : <Navigate to="/login" />;
+};
 
 export default PrivateRoute;
