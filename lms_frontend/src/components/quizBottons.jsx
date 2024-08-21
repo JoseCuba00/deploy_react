@@ -18,12 +18,16 @@ const QuizBottons = (props) => {
           (props.completed ? (
             <div className="d-flex ps-4">
               <Result status="success" />
-              <span className="ps-2">Correct</span>
+              <span className="ps-2" style={{ fontWeight: "600" }}>
+                Correct
+              </span>
             </div>
           ) : (
-            <div className="d-flex ps-4">
+            <div className="d-flex ps-4 align-items-center">
               <Result status="error" />
-              <span className="ps-2">Incorrect</span>
+              <span className="ps-2 " style={{ fontWeight: "600" }}>
+                Incorrect
+              </span>
             </div>
           ))}
       </div>

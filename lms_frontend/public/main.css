@@ -586,16 +586,19 @@ input[type="radio"].radio-quiz:checked::before {
   width: 25px;
   height: 25px;
 }
-:where(.css-dev-only-do-not-override-j9bb5n).ant-result
-  .ant-result-icon
-  > .anticon {
+
+:where(.css-j9bb5n).ant-result .ant-result-icon {
+  margin-bottom: 0px;
+  text-align: center;
+}
+:where(.css-j9bb5n).ant-result .ant-result-icon > .anticon {
   font-size: 25px;
 }
 :where(.css-dev-only-do-not-override-j9bb5n).ant-result .ant-result-icon {
   margin-bottom: 0px;
   text-align: center;
 }
-:where(.css-dev-only-do-not-override-j9bb5n).ant-result {
+:where(.css-j9bb5n).ant-result {
   padding: 0px;
   display: flex;
 }
