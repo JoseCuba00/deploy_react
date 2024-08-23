@@ -18,12 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-urlpatterns = [
-    
-]
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("",include('main.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path("accounts/change-password/", auth_views.PasswordChangeView.as_view()),
+     
 ]

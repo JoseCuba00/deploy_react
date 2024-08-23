@@ -18,7 +18,10 @@ const SelectBlock = ({
         return (
           <div className="d-flex p-0 " key={index}>
             <input
-              onClick={() => ClickFunction(boxIndex, obj)}
+              onClick={() => {
+                convertToSpeech(obj.title);
+                ClickFunction(boxIndex, obj);
+              }}
               type="radio"
               className="btn-check"
               name={`options-outlined${boxIndex}`}

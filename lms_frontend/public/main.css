@@ -314,7 +314,7 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
 }
 .text {
   display: flex;
-  padding-left: 10%;
+  padding-left: 26%;
   justify-content: center;
   align-items: center;
   min-width: 800px;
