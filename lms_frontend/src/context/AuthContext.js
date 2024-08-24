@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     const response = await fetch(
-      "/choreo-apis/awbo/lms_django/rest-api-be2/v1.0/token/",
+      "/choreo-apis/lmsdjango/lms-django/v1/token/",
       {
         method: "POST",
         headers: {
