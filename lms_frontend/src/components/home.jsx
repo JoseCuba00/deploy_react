@@ -8,7 +8,7 @@ function Home() {
   const [moduleData, setModuleData] = useState([]);
   let { user } = useContext(AuthContext);
 
-  const baseUrl = `http://127.0.0.1:8000/home?student_id=${user.id}`;
+  const baseUrl = `https://490ff604-9cc7-4100-8476-ccf80c3af959-dev.e1-us-cdp-2.choreoapis.dev/lmsdjango/lms-django/v1.0/home?student_id=${user.id}`;
   // Hacer la llamada al backend y guardar los resultados en una variable
   const makeCall = async () => {
     let response = await fetch(baseUrl, {
