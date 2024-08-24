@@ -214,7 +214,7 @@ import os
 # Configuración existente...
 
 # Añadir la variable de entorno para las credenciales de Google Cloud
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(BASE_DIR, 'key.json')
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getenv("GOOGLE_KEY")
 
 #Permitir heredar la clase Users
 AUTH_USER_MODEL = "main.Students"
