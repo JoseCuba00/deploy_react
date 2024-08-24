@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     const response = await fetch(
-      "/choreo-apis/lmsdjango/lms-django/v1/token/",
+      "https://490ff604-9cc7-4100-8476-ccf80c3af959-dev.e1-us-cdp-2.choreoapis.dev/lmsdjango/lms-django/v1/token/",
       {
         method: "POST",
         headers: {
