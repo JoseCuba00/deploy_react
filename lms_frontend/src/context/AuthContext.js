@@ -25,16 +25,19 @@ export const AuthProvider = ({ children }) => {
     setUserFound(null);
     e.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:8000/token/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target[0].value,
-        password: e.target[1].value,
-      }),
-    });
+    const response = await fetch(
+      "/choreo-apis/awbo/lms_django/rest-api-be2/v1.0/token/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: e.target[0].value,
+          password: e.target[1].value,
+        }),
+      }
+    );
 
     if (response.status === 401) {
       navigate("/login");
