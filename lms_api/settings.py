@@ -149,7 +149,8 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-ALLOWED_HOSTS = ["*","127.0.0.1"]
+ALLOWED_HOSTS = ['490ff604-9cc7-4100-8476-ccf80c3af959-dev.e1-us-cdp-2.choreoapis.com', 
+                 '490ff604-9cc7-4100-8476-ccf80c3af959-prod.e1-us-cdp-2.choreoapis.dev']
 
 CORS_ALLOW_CREDENTIALS = True
 
