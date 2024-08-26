@@ -55,11 +55,12 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "corsheaders.middleware.CorsMiddleware", # Permitir llamados sin cors
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware", # Permitir llamados sin cors
+    
     'user_visit.middleware.UserVisitMiddleware',# Biblioteca que guarda las entradas por dia de los usuarios
 ]
 
@@ -149,8 +150,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-ALLOWED_HOSTS = ['490ff604-9cc7-4100-8476-ccf80c3af959-dev.e1-us-cdp-2.choreoapis.com', 
-                 '490ff604-9cc7-4100-8476-ccf80c3af959-prod.e1-us-cdp-2.choreoapis.dev']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -173,6 +173,24 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000",
     'https://deploy-react-mocha.vercel.app'
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
 
 ###########################################################
 

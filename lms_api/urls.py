@@ -20,7 +20,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("lmsdjango/backend/v1.0/admin/", admin.site.urls),
     path("",include('main.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path("accounts/change-password/", auth_views.PasswordChangeView.as_view()),
