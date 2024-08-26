@@ -82,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "lms_api.wsgi.application"
+WSGI_APPLICATION = "lms_api.wsgi.app"
 
 
 # Database
@@ -150,7 +150,10 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app']
+
+# api/settings.py
+
 
 CORS_ALLOW_CREDENTIALS = True
 
