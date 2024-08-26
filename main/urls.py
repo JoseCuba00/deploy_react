@@ -6,9 +6,11 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.contrib import admin
 from . import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('home', views.ModuleList.as_view()),
     path('students', views.StudentsList.as_view()),
     path('students/<int:pk>', views.StudentsDetail.as_view()),
