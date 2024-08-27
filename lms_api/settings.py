@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from dotenv import load_dotenv
+import dj_database_url # Modulo para invocar la base de datos con mas facilidad
 import os 
 load_dotenv()
 
@@ -99,14 +100,7 @@ REST_FRAMEWORK = { # Para indicar que la autentificacion va a ser por token
 }
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME":os.getenv("DB_NAME") ,
-       "USER":os.getenv("DB_USER"),
-       "PASSWORD":os.getenv("DB_PWD"),
-       "HOST":os.getenv("DB_HOST"),
-       "PORT":os.getenv("DB_PORT"),
-    }
+    "default": dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 
@@ -176,7 +170,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://*",
     'https://deploy-react-mocha.vercel.app',
-    'web-production-0a07.up.railway.app',
+    'https://web-production-0a07.up.railway.app',
 
 ]
 
