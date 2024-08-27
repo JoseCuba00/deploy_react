@@ -174,10 +174,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://*",
     'https://deploy-react-mocha.vercel.app',
-    'https://490ff604-9cc7-4100-8476-ccf80c3af959-prod.e1-us-cdp-2.choreoapis.dev',
+    'web-production-0a07.up.railway.app',
 
 ]
 
