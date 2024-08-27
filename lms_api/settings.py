@@ -243,7 +243,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getenv("GOOGLE_KEY")
 #Permitir heredar la clase Users
 AUTH_USER_MODEL = "main.Students"
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_URL = '/media/' # Para poder cargar las imagenes desde el navegador
 
