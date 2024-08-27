@@ -2,9 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "lms_api/wsgi.py",
+      "src": "lms/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.5" }
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "lms/wsgi.py"
     }
   ]
 }
