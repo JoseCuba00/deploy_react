@@ -50,11 +50,11 @@ function Quiz() {
     try {
       const [assignmentsRes, moduleRes] = await Promise.all([
         fetch(
-          `http://127.0.0.1:8000/module/${module_id}/assignments/${assignments_id}?student_id=${user.id}`,
+          `https://web-production-0a07.up.railway.app/module/${module_id}/assignments/${assignments_id}?student_id=${user.id}`,
           { credentials: "include" }
         ),
         fetch(
-          `http://127.0.0.1:8000/module/${module_id}?student_id=${user.id}`,
+          `https://web-production-0a07.up.railway.app/module/${module_id}?student_id=${user.id}`,
           { credentials: "include" }
         ),
       ]);

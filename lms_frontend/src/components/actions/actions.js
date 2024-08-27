@@ -1,12 +1,15 @@
 import axios from "axios";
 
 const putRequestComplete = async (path, value) => {
-  let response = await fetch(`http://127.0.0.1:8000/${path}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ completed: value }),
-    credentials: "include",
-  });
+  let response = await fetch(
+    `https://web-production-0a07.up.railway.app/${path}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ completed: value }),
+      credentials: "include",
+    }
+  );
   if (response.ok) {
     let json = await response.json();
   } else {
@@ -56,7 +59,7 @@ const convertToSpeech = async (text, enableAnimation, setIsPlaying) => {
   console.log("Me activo");
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/convert/",
+      "https://web-production-0a07.up.railway.app/convert/",
       { text },
       {
         responseType: "arraybuffer",

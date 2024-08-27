@@ -19,7 +19,7 @@ function Profile() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://127.0.0.1:8000/api/get_profile_image?student_id=${user.id}`,
+        `https://web-production-0a07.up.railway.app/api/get_profile_image?student_id=${user.id}`,
         {
           credentials: "include",
         }
@@ -53,7 +53,7 @@ function Profile() {
 
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/profile_image/${user.id}`,
+        `https://web-production-0a07.up.railway.app/api/profile_image/${user.id}`,
         formData,
         {
           headers: {
