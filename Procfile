@@ -1,1 +1,1 @@
-web: gunicorn lms_api.wsgi
+web: python manage.py collectstatic && gunicorn lms_api.wsgi

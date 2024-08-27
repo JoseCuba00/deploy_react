@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "whitenoise.runserver_nostatic", # permite usar los archivos estaticos en produccion
     "main",
     "rest_framework", # Para poder usar el rest API de Django
     "rest_framework.authtoken", # Para poder enviar el token al usuario 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "corsheaders.middleware.CorsMiddleware", # Permitir llamados sin cors
@@ -193,6 +195,12 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
+    },
+}
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
