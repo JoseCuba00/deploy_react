@@ -7,11 +7,6 @@
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.5" }
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "lms_api/wsgi.py"
-    }
-  ],
+
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
