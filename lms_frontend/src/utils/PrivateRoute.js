@@ -28,7 +28,7 @@ const PrivateRoute = ({ children }) => {
   const refreshToken = async () => {
     try {
       const api = axios.create({
-        baseURL: "http://127.0.0.1:8000",
+        baseURL: "https://web-production-0a07.up.railway.app",
       });
 
       api.interceptors.request.use(
