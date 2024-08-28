@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'user_visit', # Biblioteca que guarda las entradas por dia de los usuarios
     "django_extensions",# Para poder usar HTTPS
     "django_ckeditor_5", # Para crear contenido HTML mas facil 
-    'cloudinary_storage', # Para poder user cloudinary
     'cloudinary',
+    'cloudinary_storage', # Para poder user cloudinary
+    
 
 ]
 
@@ -361,5 +362,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv("API_SECRET")
 }	
 
-MEDIA_URL = '/media/'  # or any prefix you choose
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
