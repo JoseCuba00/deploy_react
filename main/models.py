@@ -26,7 +26,7 @@ class Topics(models.Model):
 
 class Students(AbstractUser): # Heredar la clase User
     phone_number = models.CharField(max_length=12)
-    profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/defaultImgProfile.png')
+    profile_image = models.FileField(upload_to='profile_images/', default='profile_images/defaultImgProfile.png')
     class Meta:
         db_table = "Students"
 
