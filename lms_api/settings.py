@@ -340,3 +340,17 @@ CKEDITOR_5_CONFIGS = {
 CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "custom_upload_file"
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png'] # optional
+
+# Crear un archivo json para las credenciales de google 
+import json
+import tempfile
+
+# Crear un archivo temporal
+temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.json')
+
+# Escribir el contenido de las credenciales en el archivo temporal
+temp_file.write(os.getenv("GOOGLE_KEY").encode())
+temp_file.close()
+
+# Establecer la variable de entorno GOOGLE_APPLICATION_CREDENTIALS a la ruta del archivo temporal
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
