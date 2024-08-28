@@ -31,6 +31,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
 
+import cloudinary_storage
+
 
 # Application definition
 
@@ -337,7 +339,6 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
-import cloudinary_storage
 
 CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "custom_upload_file"
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
