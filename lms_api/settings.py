@@ -240,9 +240,7 @@ AUTH_USER_MODEL = "main.Students"
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
-MEDIA_URL = '/media/' # Para poder cargar las imagenes desde el navegador
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Hacia donde van a ir los archivos media
 
 
 customColorPalette = [
@@ -354,3 +352,12 @@ temp_file.close()
 
 # Establecer la variable de entorno GOOGLE_APPLICATION_CREDENTIALS a la ruta del archivo temporal
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api	
+cloudinary.config( 
+  	cloud_name = os.getenv("CLOUD_NAME"),
+  	api_key = os.getenv("API_KEY"),
+  	api_secret = os.getenv("API_SECRET")
+)

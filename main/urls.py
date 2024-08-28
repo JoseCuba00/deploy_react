@@ -29,4 +29,3 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')), # Hay que agregar esto para que la biblioteca pueda pinchar bien 
     path("upload/", views.custom_upload_function, name="custom_upload_file"),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Para poder cargar las imagenes desde el navegador
