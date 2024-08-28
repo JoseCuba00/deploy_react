@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'user_visit', # Biblioteca que guarda las entradas por dia de los usuarios
     "django_extensions",# Para poder usar HTTPS
     "django_ckeditor_5", # Para crear contenido HTML mas facil 
+    'cloudinary_storage', # Para poder user cloudinary
+    'cloudinary',
 
 ]
 
@@ -353,11 +355,11 @@ temp_file.close()
 # Establecer la variable de entorno GOOGLE_APPLICATION_CREDENTIALS a la ruta del archivo temporal
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api	
-cloudinary.config( 
-  	cloud_name = os.getenv("CLOUD_NAME"),
-  	api_key = os.getenv("API_KEY"),
-  	api_secret = os.getenv("API_SECRET")
-)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
+    'API_KEY': os.getenv("API_KEY"),
+    'API_SECRET': os.getenv("API_SECRET")
+}	
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
