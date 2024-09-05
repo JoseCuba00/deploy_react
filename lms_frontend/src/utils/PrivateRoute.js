@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode"; // Import correctly without destructurin
 import axios from "axios";
 
 const PrivateRoute = ({ children }) => {
-  const [isAuthorized, setIsAuthorized] = useState([]); // Use correct camelCase for setState function
+  const [isAuthorized, setIsAuthorized] = useState(null); // Use correct camelCase for setState function
   //const { authTokens, setAuthTokens } = useContext(AuthContext); // Destructure from AuthContext
   let [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
@@ -64,6 +64,7 @@ const PrivateRoute = ({ children }) => {
       setIsAuthorized(false);
       return;
     }
+    console.log("sigo en la f");
     const decoded = jwtDecode(authTokens.access);
     const tokenExpiration = decoded.exp;
     const now = Date.now() / 1000;
@@ -71,10 +72,13 @@ const PrivateRoute = ({ children }) => {
       await refreshToken();
     } else {
       setIsAuthorized(true);
+      console.log("es verdadero");
     }
   };
 
-  return isAuthorized ? children : <Navigate to="/login" />;
+  if (isAuthorized !== null) {
+    return isAuthorized ? children : <Navigate to="/login" />;
+  }
 };
 
 export default PrivateRoute;

@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
-  let [userFound, setUserFound] = useState(null);
+  let [userFound, setUserFound] = useState([]);
 
   const navigate = useNavigate();
 

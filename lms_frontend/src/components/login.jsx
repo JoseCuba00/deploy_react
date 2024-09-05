@@ -1,5 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Space, Spin } from "antd";
 
 function Login() {
   useEffect(() => {
@@ -16,7 +18,13 @@ function Login() {
   }, []);
 
   let { loginUser, userFound } = useContext(AuthContext);
-
+  const [userInfo, set] = useState([]);
+  console.log(userFound);
+  const Imprimir = () => {
+    if (typeof userFound === "boolean") {
+      console.log("hola");
+    }
+  };
   return (
     <div
       className=" mt-4 justify-content-sm-center pt-5"
@@ -57,13 +65,32 @@ function Login() {
                     id="exampleInputPassword1"
                   ></input>
                 </div>
-                {userFound !== null && !userFound && (
-                  <p style={{ color: "red" }}>Usuario no encontrado</p>
-                )}
-                <div className="d-flex justify-content-end">
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
+
+                <div className="d-flex justify-content-between ">
+                  <div className="ps-3">
+                    {userFound === null ? (
+                      <Space className="ps-3">
+                        <Spin
+                          indicator={
+                            <LoadingOutlined style={{ fontSize: 30 }} spin />
+                          }
+                        />
+                      </Space>
+                    ) : (
+                      !userFound && (
+                        <p style={{ color: "red" }}>Usuario no encontrado</p>
+                      )
+                    )}
+                  </div>
+                  <div className="pe-3">
+                    <button
+                      type="submit"
+                      className="btn btn-primary "
+                      onClick={() => Imprimir()}
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
