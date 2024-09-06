@@ -61,7 +61,12 @@ function TheoryComoponent({
   return (
     <div
       className=" ck-content"
-      style={{ flex: "1", position: "relative", top: "120px" }}
+      style={{
+        flex: "1",
+        position: "relative",
+        top: "108px",
+        padding: "1% 3%",
+      }}
     >
       <MyComponent htmlString={content} />
       <div className="ps-5 pe-5">

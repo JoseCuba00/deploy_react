@@ -321,6 +321,18 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
   max-width: 55%;
   min-width: 50%;
 }
+.container-content {
+  padding-left: 17%;
+  z-index: 1;
+  width: 100%;
+}
+
+@media (max-width: 770px) {
+  /* Cuand */
+  .container-content {
+    padding-left: 0;
+  }
+}
 
 .droppable-zone-main {
   position: absolute;

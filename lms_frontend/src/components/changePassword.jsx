@@ -27,9 +27,12 @@ function ChangePassword() {
     e.preventDefault();
     if (e.target[0].value === e.target[1].value) {
       await axios
-        .put(`http://127.0.0.1:8000/account/change_password/${user.id}`, {
-          password: e.target[0].value,
-        })
+        .put(
+          `https://web-production-0a07.up.railway.app/account/change_password/${user.id}`,
+          {
+            password: e.target[0].value,
+          }
+        )
         .then(async (response) => {
           successAlert();
         })

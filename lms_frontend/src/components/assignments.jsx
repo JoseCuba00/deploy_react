@@ -153,15 +153,7 @@ function Quiz() {
       />
       <div style={{ display: "flex" }}>
         <Module TopicData={topicData} />
-        <div
-          style={{
-            paddingLeft: "10%",
-            zIndex: 1,
-            width: "100%",
-          }}
-        >
-          {renderContent()}
-        </div>
+        <div className="container-content">{renderContent()}</div>
       </div>
     </>
   );
