@@ -155,8 +155,9 @@ function Quiz() {
         <Module TopicData={topicData} />
         <div
           style={{
-            paddingLeft: "18%",
+            paddingLeft: "10%",
             zIndex: 1,
+            width: "100%",
           }}
         >
           {renderContent()}

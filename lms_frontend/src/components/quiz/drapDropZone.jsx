@@ -45,6 +45,7 @@ const DroppableZoneMain = (props) => {
                     {(provided) => (
                       <div className="pe-2" style={{ height: "33px" }}>
                         <p
+                          onMouseDown={() => convertToSpeech(title)}
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -90,6 +91,7 @@ const DroppableBlock = ({ index, objects, disabled }) => (
                   };
                   return (
                     <p
+                      onMouseDown={() => convertToSpeech(obj.title)}
                       className={`btn boton-draggable ${
                         disabled && "isDisabled"
                       }`}
