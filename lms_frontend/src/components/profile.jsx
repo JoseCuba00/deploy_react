@@ -101,11 +101,7 @@ function Profile() {
 
         <div className="d-flex pb-4">
           <div className="pe-3">
-            <label
-              htmlFor="file-upload"
-              className="btn btn-primary my-2 "
-              style={{ background: "#341ca6", border: "1px solid transparent" }}
-            >
+            <label htmlFor="file-upload" className="botons-next-submit ">
               Change profile photo
               <input
                 id="file-upload"
@@ -118,9 +114,8 @@ function Profile() {
           <div>
             <Link
               to="change_password"
-              className="btn btn-primary my-2  "
+              className="botons-next-submit  "
               type="submit"
-              style={{ background: "#341ca6", border: "1px solid transparent" }}
             >
               Change password
             </Link>

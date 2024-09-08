@@ -35,9 +35,20 @@
   transition: box-shadow 0.4s;
 }
 .home-card:hover {
-  box-shadow: 0px 0px 25px 19px rgb(0 0 200 / 5%);
+  box-shadow: 0px 0px 25px 19px rgba(220, 7, 7, 0.096);
 }
-
+.botons-next-submit {
+  color: white;
+  padding: 6px 7px;
+  border-radius: 3px;
+  background: rgb(199, 82, 51);
+  border: 1px solid transparent;
+  text-decoration: none; /* Elimina la línea debajo */
+  color: white; /* Mantiene el color del texto original */
+}
+.botons-next-submit:hover {
+  color: rgb(240, 240, 240); /* Mantiene el color al pasar el mouse */
+}
 body {
   min-height: 100vh;
 }
@@ -416,8 +427,7 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
   border: 2px solid white;
   position: relative;
 }
-
-.navHeaderFont {
+img .navHeaderFont {
   font-size: 1.3rem;
   color: white;
 }
@@ -691,6 +701,10 @@ abbr {
 .div_img_speaker:hover img {
   animation: ease-in-out;
   transform: scale(1.2);
+}
+.img_logo {
+  height: 45px;
+  width: 150px;
 }
 
 .loader {

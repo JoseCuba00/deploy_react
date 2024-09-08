@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react"; // Se activa la funcion solo cuando el componente es cargado
 import AuthContext from "../context/AuthContext";
 import { Progress } from "antd";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   // Esto es un componente, es un pedazo de UI , es como un div
@@ -26,6 +27,7 @@ function Home() {
   useEffect(() => {
     makeCall();
   }, []);
+  const navigate = useNavigate();
   //<a href={`/module/${module.id}/assignments/${module.first_id}`} className="btn btn-primary ">Button</a>
   //<p className="card-text "><em>{module.description}</em></p>
 
@@ -42,9 +44,12 @@ function Home() {
 
         return (
           <div
-            className=" container  card mt-3 d-flex flex-row home-card "
+            className=" container  card mt-4 d-flex flex-row home-card "
             key={index}
             style={{ padding: "10px", top: "60px" }}
+            onClick={() => {
+              navigate(`/module/${module.id}/assignments/${module.first_id}`);
+            }}
           >
             <div className="pt-2">
               <div className="d-flex  iconStyle ">
@@ -56,7 +61,7 @@ function Home() {
               </div>
             </div>
 
-            <div className=" card-body">
+            <div className=" card-body mb-3">
               <h4 className="card-title">{module.title}</h4>
 
               <div>
@@ -65,7 +70,6 @@ function Home() {
                     (assignmentsCompleted * 100) / totalAssignments
                   )}
                   size="small"
-                  strokeColor="#4525d2"
                 />
               </div>
 
@@ -75,18 +79,6 @@ function Home() {
                   {totalAssignments}
                 </small>
               </span>
-              <div className="pt-3">
-                <a
-                  href={`/module/${module.id}/assignments/${module.first_id}`}
-                  className="btn btn-primary "
-                  style={{
-                    background: "#341ca6",
-                    border: "1px solid transparent",
-                  }}
-                >
-                  Button
-                </a>
-              </div>
             </div>
           </div>
         );

@@ -21,6 +21,10 @@ const ContainerMain = styled.div`
   border-radius: 20px;
   width: ${(props) => (props.$isText ? "900px" : "180px")};
   height: ${(props) => (props.$isText ? "100px" : "100%")};
+  @media (max-width: 768px) {
+    width: ${(props) => (props.$isText ? "500px" : "80px")};
+    height: ${(props) => (props.$isText ? "100px" : "100%")};
+  }
 `;
 
 const DroppableZoneMain = (props) => {

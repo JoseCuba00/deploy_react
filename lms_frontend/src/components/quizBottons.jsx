@@ -6,11 +6,7 @@ const QuizBottons = (props) => {
     <div className="d-flex justify-content-between pt-5">
       <div className="d-flex align-items-center">
         <div>
-          <button
-            onClick={props.onClickButton}
-            className="btn btn-primary"
-            style={{ background: "#341ca6", border: "1px solid transparent" }}
-          >
+          <button onClick={props.onClickButton} className="botons-next-submit">
             {props.buttonName}
           </button>
         </div>
@@ -33,11 +29,7 @@ const QuizBottons = (props) => {
       </div>
       <div>
         {!props.Next && (
-          <button
-            onClick={props.onClickNext}
-            className="btn btn-primary"
-            style={{ background: "#341ca6", border: "1px solid transparent" }}
-          >
+          <button onClick={props.onClickNext} className="botons-next-submit">
             Next
           </button>
         )}

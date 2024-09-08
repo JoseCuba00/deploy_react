@@ -31,14 +31,17 @@ function Header() {
     <nav
       className="navbar navbar-expand-sm navbar-light fixed-top"
       style={{
-        backgroundColor: "#4525d2",
-        color: "white",
+        backgroundColor: "#fde9c9",
       }}
     >
       <div className="container">
-        {/* Logo o título */}
-        <span className="navbar-brand navHeaderFont">LMS</span>
-
+        {/* Logo */}
+        <div>
+          <img
+            className="img_logo"
+            src={process.env.PUBLIC_URL + "/logo.png"}
+          ></img>
+        </div>
         {/* Botón de colapso */}
         <button
           className="navbar-toggler"
@@ -57,12 +60,12 @@ function Header() {
           <ul className="navbar-nav mx-auto navHeaderFont">
             <li className="nav-item active">
               <Link className="nav-link" to="/">
-                <span className="navHeaderFont">Home</span>
+                <span className="navHeaderFont  h4">Home</span>
               </Link>
             </li>
             <li className="nav-item active navHeaderFont">
               <Link className="nav-link" to="/profile/">
-                <span className="navHeaderFont">Profile</span>
+                <span className="navHeaderFont h4">Profile</span>
               </Link>
             </li>
             <li className="nav-item active">
@@ -71,23 +74,18 @@ function Header() {
                   className="nav-link navHeaderFont"
                   onClick={showPromiseConfirm}
                 >
-                  <span className="navHeaderFont">Log out</span>
+                  <span className="navHeaderFont h4">Log out</span>
                 </Link>
               ) : (
                 <Link className="nav-link navHeaderFont" to="/login">
-                  <span className="navHeaderFont">Log in</span>
+                  <span className="navHeaderFont h4">Log in</span>
                 </Link>
               )}
             </li>
           </ul>
           <div className="d-flex align-items-center">
             <div>
-              <span
-                className="pe-2"
-                style={{ fontSize: "1.30rem", userSelect: "none" }}
-              >
-                Hola{" "}
-              </span>
+              <span className="pe-2 navHeaderFont h4">Hola </span>
             </div>
             <div>
               <img
