@@ -91,6 +91,7 @@ const SelectQuiz = ({
           questionId,
           assignments_id,
           userId,
+          "questions",
           "questions_update"
         );
     }

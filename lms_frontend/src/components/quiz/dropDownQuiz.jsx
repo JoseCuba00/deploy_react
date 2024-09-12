@@ -84,6 +84,7 @@ const DropDownQuiz = ({
           questionId,
           assignments_id,
           userId,
+          "question",
           "questions_update"
         );
     }

@@ -156,7 +156,7 @@ main {
 .assignments:after {
   position: absolute;
   content: "";
-  border-bottom: 1px solid rgb(0, 99, 228);
+  border-bottom: 1px solid red;
   border-radius: 1em;
   bottom: 0.3em;
   transition: transform 0s cubic-bezier(0.075, 0.82, 0.165, 1),
@@ -211,15 +211,7 @@ main {
 }
 
 /* Opcional: Modificar estilos para colapsar en pantallas pequeñas */
-@media (max-width: 768px) {
-  .scrollable-menu {
-    left: -257px; /* Oculta la barra lateral */
-  }
 
-  .scrollable-menu.active {
-    left: 0; /* Muestra la barra lateral cuando está activa */
-  }
-}
 .content {
   position: fixed;
 }
@@ -323,6 +315,7 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
   justify-content: center;
   align-items: center;
 }
+
 .text {
   display: flex;
   margin: 0 auto; /* Centra el elemento horizontalmente */
@@ -571,12 +564,12 @@ input[type="radio"].radio-quiz:checked::before {
   font-weight: 600;
 }
 .click-quiz-main {
-  padding-top: 20px;
+  padding-top: 13%;
 }
 .click-quiz-sentences {
   position: relative;
   display: flex;
-  width: 850px;
+  width: 90%;
   height: 100px;
   border: 1px solid #8c8c8c;
   flex-wrap: wrap;
@@ -589,8 +582,8 @@ input[type="radio"].radio-quiz:checked::before {
   flex-wrap: wrap;
   background-color: rgb(245, 245, 245);
   border-radius: 20px;
-  width: 850px;
-  height: 100px;
+  width: 870px;
+  min-height: 100px;
   padding: 22px;
 }
 
@@ -769,4 +762,18 @@ abbr {
 }
 .ant-btn {
   font-family: Manrope !important;
+}
+
+@media (max-width: 768px) {
+  .scrollable-menu {
+    left: -257px; /* Oculta la barra lateral */
+  }
+
+  .scrollable-menu.active {
+    left: 0; /* Muestra la barra lateral cuando está activa */
+  }
+  .click-quiz-words {
+    width: 300px;
+    min-height: 250px;
+  }
 }

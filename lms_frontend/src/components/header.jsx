@@ -31,7 +31,7 @@ function Header() {
     <nav
       className="navbar navbar-expand-sm navbar-light fixed-top"
       style={{
-        backgroundColor: "#fde9c9",
+        backgroundColor: "#f9d0ab",
       }}
     >
       <div className="container">

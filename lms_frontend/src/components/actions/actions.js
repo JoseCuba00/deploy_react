@@ -22,12 +22,18 @@ const ChangeData = async (
   questionId,
   assignments_id,
   userId,
+  type, // sirve para indicar el tipo , si es un contenido teorico o una pregunta y asi diferenciamos los id
   destiny
 ) => {
-  setQuestionData((prevQuestionData) =>
-    prevQuestionData.map((question) =>
-      question.id === questionId ? { ...question, completed: true } : question
-    )
+  setQuestionData(
+    (
+      prevQuestionData // Para que se cambie de color instantaneamente
+    ) =>
+      prevQuestionData.map((question) =>
+        question.id === questionId && question.hasOwnProperty(type)
+          ? { ...question, completed: true }
+          : question
+      )
   );
   //questions_update
   putRequestComplete(`${destiny}/${questionId}`, true); // Poner el completed a la pregunta

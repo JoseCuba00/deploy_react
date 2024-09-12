@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { QuizBottons } from "../quizBottons";
 import { ChangeData } from "../actions/actions";
-import ReactPlayer from "react-player";
 
 function TheoryComoponent({
   title,
@@ -17,7 +16,7 @@ function TheoryComoponent({
   userId,
 }) {
   const [showResult, setShowResult] = useState(false);
-
+  console.log(questionId, assignments_id, userId);
   useEffect(() => {
     if (isCompleted) {
       setShowResult(true);
@@ -49,6 +48,7 @@ function TheoryComoponent({
         questionId,
         assignments_id,
         userId,
+        "theory",
         "theory_update"
       );
     setShowResult(true);
@@ -56,7 +56,7 @@ function TheoryComoponent({
   const onClickNext = useCallback(() => {
     setCurrentQuestion((prevQuestion) => prevQuestion + 1);
   }, [setCurrentQuestion]);
-  console.log(content);
+
   // Se le pone la clase ck-content para que no afecte al resto de las paginas
   return (
     <div

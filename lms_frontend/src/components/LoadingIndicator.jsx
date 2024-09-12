@@ -4,7 +4,11 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 const LoadingIndicator = () => (
   <Space>
-    <Spin indicator={<LoadingOutlined style={{ fontSize: 70 }} spin />} />
+    <Spin
+      indicator={
+        <LoadingOutlined style={{ fontSize: 70, color: "red" }} spin />
+      }
+    />
   </Space>
 );
 

@@ -34,7 +34,7 @@ const CheckBoxQuiz = ({
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-
+  console.log(questionId, assignments_id, userId);
   useEffect(() => {
     const initializeQuestion = () => {
       if (isCompleted) {
@@ -97,6 +97,7 @@ const CheckBoxQuiz = ({
           questionId,
           assignments_id,
           userId,
+          "question",
           "questions_update"
         );
     }

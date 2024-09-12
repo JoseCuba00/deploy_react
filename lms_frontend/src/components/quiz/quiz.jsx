@@ -33,7 +33,7 @@ const RadioQuiz = ({
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-
+  console.log(questionId, assignments_id, userId);
   // Effect to handle loading and resetting question data
   useEffect(() => {
     const initializeQuestion = () => {
@@ -70,6 +70,7 @@ const RadioQuiz = ({
         questionId,
         assignments_id,
         userId,
+        "question",
         "questions_update"
       );
     }

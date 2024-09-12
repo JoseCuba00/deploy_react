@@ -83,6 +83,7 @@ const ClickToRowQuiz = ({
           questionId,
           assignments_id,
           userId,
+          "question",
           "questions_update"
         );
     }
