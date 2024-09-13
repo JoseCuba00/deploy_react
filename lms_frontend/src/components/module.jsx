@@ -16,7 +16,7 @@ function Module({ TopicData }) {
   return (
     <>
       <button
-        className="btn-toggle  d-md-none" // Añade la clase navbar-toggler
+        className="btn-toggle  d-xxl-none" // Añade la clase navbar-toggler
         onClick={toggleSidebar}
         style={{
           position: "fixed",

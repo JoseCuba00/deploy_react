@@ -305,7 +305,7 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
 .dropContainer {
   padding-top: 6px;
   display: inline-grid;
-  width: 80px;
+  width: 120px;
   justify-items: center;
 }
 
@@ -329,16 +329,6 @@ input[type="radio"].btn-check:checked + .isDisabledSelect {
   padding-left: 17%;
   z-index: 1;
   width: 100%;
-}
-
-@media (max-width: 770px) {
-  /* Cuand */
-  .container-content {
-    padding-left: 0;
-  }
-  .text {
-    min-width: 85%;
-  }
 }
 
 .droppable-zone-main {
@@ -764,7 +754,7 @@ abbr {
   font-family: Manrope !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1394px) {
   .scrollable-menu {
     left: -257px; /* Oculta la barra lateral */
   }
@@ -772,8 +762,23 @@ abbr {
   .scrollable-menu.active {
     left: 0; /* Muestra la barra lateral cuando está activa */
   }
+
+  .container-content {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 770px) {
+  /* Cuand */
+
+  .text {
+    min-width: 85%;
+  }
   .click-quiz-words {
     width: 300px;
     min-height: 250px;
+  }
+  .boton-draggable {
+    width: 100%;
   }
 }

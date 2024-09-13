@@ -19,16 +19,15 @@ const Container = styled.div`
 const ContainerMain = styled.div`
   background-color: rgb(245, 245, 245);
   border-radius: 20px;
-  width: ${(props) => (props.$isText ? "900px" : "180px")};
+  width: ${(props) => (props.$isText ? "100%" : "180px")};
   height: ${(props) => (props.$isText ? "100px" : "100%")};
   @media (max-width: 768px) {
-    width: ${(props) => (props.$isText ? "500px" : "80px")};
+    width: ${(props) => (props.$isText ? "100%" : "80px")};
     height: ${(props) => (props.$isText ? "100px" : "100%")};
   }
 `;
 
 const DroppableZoneMain = (props) => {
-  console.log(props.isText);
   return (
     <div className="pt-5 ps-3 ">
       <Droppable
@@ -75,7 +74,7 @@ const DroppableBlock = ({ index, objects, disabled }) => (
   <Droppable droppableId={`${index + 1}`} className="align-self-center">
     {(provided, snapshot) => (
       <div className="d-inline-flex" style={{ width: "120px" }}>
-        <div className="dropContainer" style={{ width: "120px" }}>
+        <div className="dropContainer">
           <Container
             $isdraggingover={snapshot.isDraggingOver ? "true" : ""} // $ indica que es un transient props que evita que esa props sea enviada al DOM
             {...provided.droppableProps}
@@ -120,9 +119,8 @@ const DroppableBlock = ({ index, objects, disabled }) => (
 );
 
 const DroppableZoneSentence = (props) => {
-  console.log(props.objects);
   return (
-    <div className="ps-4" style={{ padding: "14px" }}>
+    <div className="ps-4" style={{ padding: "3%" }}>
       <h4 className="pb-2">
         Place the words in their correct place by dragging it
       </h4>

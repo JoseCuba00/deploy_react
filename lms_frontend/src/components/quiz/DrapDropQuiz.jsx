@@ -7,7 +7,8 @@ import LoadingIndicator from "../LoadingIndicator";
 import styled from "styled-components";
 
 const FullContainer = styled.div`
-  width: 897px;
+  width: 90%;
+  padding: 3%;
   ${(props) =>
     !props.$isText &&
     `
