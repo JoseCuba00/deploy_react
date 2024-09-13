@@ -23,7 +23,7 @@ const ContainerMain = styled.div`
   height: ${(props) => (props.$isText ? "100px" : "100%")};
   @media (max-width: 768px) {
     width: ${(props) => (props.$isText ? "100%" : "80px")};
-    height: ${(props) => (props.$isText ? "100px" : "100%")};
+    min-height: ${(props) => (props.$isText ? "150px" : "100%")};
   }
 `;
 
@@ -40,7 +40,7 @@ const DroppableZoneMain = (props) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
               style={{ height: "100%" }}
-              className={`pt-2 ${props.isText && "d-flex"} `}
+              className={`pt-2 ${props.isText ? "d-flex" : "ps-4"} `}
             >
               {props.objects?.map(({ id, title }, index) => {
                 return (
