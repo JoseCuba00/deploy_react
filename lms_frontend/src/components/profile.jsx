@@ -19,7 +19,7 @@ function Profile() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8000/api/get_profile_image?student_id=${user.id}`,
+        `https://web-production-0a07.up.railway.app/api/get_profile_image?student_id=${user.id}`,
         {
           credentials: "include",
         }
