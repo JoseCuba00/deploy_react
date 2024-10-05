@@ -9,7 +9,12 @@
 .img_message:hover {
   animation: wave 1s ease-in-out;
 }
-
+.buttom-link {
+  color: black;
+}
+.buttom-link:hover {
+  color: #8c8c8c;
+}
 @keyframes wave {
   0% {
     transform: rotate(0deg);
@@ -415,7 +420,7 @@ img .navHeaderFont {
   color: white;
 }
 body {
-  background-color: rgb(250, 250, 250);
+  background-color: white;
   font-family: Manrope !important;
 }
 * {
@@ -668,9 +673,14 @@ abbr {
   color: #d10000;
  } */
 
-.react-calendar__tile.enabled abbr,
+.react-calendar__tile.enabled abbr {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
 .react-calendar__tile--now abbr {
-  background-color: #5dbc4a;
+  background-color: #63bf52;
   color: white;
   padding: 5px;
   border-radius: 5px;

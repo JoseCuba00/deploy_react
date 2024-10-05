@@ -4,7 +4,9 @@ from django.core.exceptions import ValidationError
 from . import models 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
-from user_visit.models import UserVisit
+from datetime import date, timedelta
+from django.http import JsonResponse
+from .models import ClassSchedule
 
 class AssignmentsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,17 +19,31 @@ class AssignmentsSerializerUpdate(serializers.ModelSerializer):
         model = models.Assignments
         fields = ['id','completed']
 
-class UserVisitsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserVisit
-        fields = ["timestamp"]
 
 class StudentsSerializer(serializers.ModelSerializer):
-    user_visits = UserVisitsSerializer(many=True, read_only=True)
+    user_visits = serializers.SerializerMethodField()
+        
     class Meta:
         model = models.Students
         fields = ['username','email','phone_number','profile_image','user_visits']
+    
+    def get_user_visits(self, obj):
+        student_id = self.context.get('student_id')
+        schedules = ClassSchedule.objects.filter(student_id=student_id)
+        current_date = date.today()
+        end_date = current_date + timedelta(days=60)  # Puedes ajustar el rango de fechas según necesites
+        class_dates = []
 
+        while current_date <= end_date:
+            for schedule in schedules:
+                for day in schedule.day_of_week.all():  # Iterar sobre los días de la semana
+                    if current_date.strftime('%A') == day.title:  # Comparar el nombre del día
+                        class_dates.append(current_date.isoformat())
+            current_date += timedelta(days=1)
+
+        return class_dates
+
+    
 class StudentsSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = models.Students

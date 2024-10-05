@@ -31,7 +31,8 @@ function Header() {
     <nav
       className="navbar navbar-expand-sm navbar-light fixed-top"
       style={{
-        backgroundColor: "#f9d0ab",
+        backgroundColor: "white",
+        boxShadow: "0px 0px 8px -5px rgb(1, 1, 1, 0.5)",
       }}
     >
       <div className="container">
@@ -60,12 +61,12 @@ function Header() {
           <ul className="navbar-nav mx-auto navHeaderFont">
             <li className="nav-item active">
               <Link className="nav-link" to="/">
-                <span className="navHeaderFont  h4">Home</span>
+                <span className="navHeaderFont buttom-link h5">Home</span>
               </Link>
             </li>
             <li className="nav-item active navHeaderFont">
               <Link className="nav-link" to="/profile/">
-                <span className="navHeaderFont h4">Profile</span>
+                <span className="navHeaderFont  buttom-link h5">Profile</span>
               </Link>
             </li>
             <li className="nav-item active">
@@ -74,18 +75,18 @@ function Header() {
                   className="nav-link navHeaderFont"
                   onClick={showPromiseConfirm}
                 >
-                  <span className="navHeaderFont h4">Log out</span>
+                  <span className="navHeaderFont buttom-link h5">Log out</span>
                 </Link>
               ) : (
                 <Link className="nav-link navHeaderFont" to="/login">
-                  <span className="navHeaderFont h4">Log in</span>
+                  <span className="navHeaderFont buttom-link h5">Log in</span>
                 </Link>
               )}
             </li>
           </ul>
           <div className="d-flex align-items-center">
             <div>
-              <span className="pe-2 navHeaderFont h4">Hola </span>
+              <span className="pe-2 navHeaderFont h5">Hola </span>
             </div>
             <div>
               <img

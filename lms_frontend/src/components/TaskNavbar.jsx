@@ -62,7 +62,8 @@ const TaskNavbar = ({ currentQuestion, setCurrentQuestion, questionData }) => {
             <nav
               className="navbar navbar-expand-lg navbar-light"
               style={{
-                backgroundColor: "rgb(245,245,245)",
+                backgroundColor: "white",
+                boxShadow: "0px 0px 8px -5px rgb(1, 1, 1, 0.5)",
                 width: "100%", // Asegúrate de que ocupe todo el ancho
               }}
             >

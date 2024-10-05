@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 import cloudinary_storage
@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken", # Para poder enviar el token al usuario 
     "corsheaders", # Para que no funcione la defensa cors y poder hacer llamados de test
     'rest_framework_simplejwt.token_blacklist', # Para poder usar la blacklist
-    'user_visit', # Biblioteca que guarda las entradas por dia de los usuarios
     "django_extensions",# Para poder usar HTTPS
     "django_ckeditor_5", # Para crear contenido HTML mas facil 
     'cloudinary',
@@ -69,7 +68,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     
-    'user_visit.middleware.UserVisitMiddleware',# Biblioteca que guarda las entradas por dia de los usuarios
 ]
 
 ROOT_URLCONF = "lms_api.urls"

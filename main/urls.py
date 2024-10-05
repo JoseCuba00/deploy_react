@@ -24,7 +24,7 @@ urlpatterns = [
     path('convert/', views.convert_text_to_speech, name='convert_text_to_speech'),
     path('account/change_password/<int:pk>', views.ChangePasswordView.as_view(), name='auth_change_password'),
     path('api/get_profile_image', views.ProfileImageView.as_view(), name='profile_image'),
-    path('api/get_profile_dates', views.ProfileDatesView.as_view(), name='profile_dates'),
+    #path('api/get_profile_dates', views.get_class_schedule, name='profile_dates'),
     path('api/profile_image/<int:pk>', views.ProfileImageViewUpdate.as_view(), name='profile_image_update'),
     path("ckeditor5/", include('django_ckeditor_5.urls')), # Hay que agregar esto para que la biblioteca pueda pinchar bien 
     path("upload/", views.custom_upload_function, name="custom_upload_file"),

@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from .models import Students, Teacher, Module, Assignments, Topics, Choices, Questions, Sentences, StudentQuestion, StudentAssignments,TheoreticalContent,StudentTheory
+from .models import Students, Teacher, Module, Assignments, Topics, Choices, Questions, Sentences, StudentQuestion, StudentAssignments,TheoreticalContent,StudentTheory,ClassSchedule,Day_of_week
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
@@ -82,6 +82,8 @@ class UserAdmin(BaseUserAdmin):
     ordering = ["email"]
     filter_horizontal = []
 
+admin.site.register(Day_of_week)
+admin.site.register(ClassSchedule)
 admin.site.register(Students,UserAdmin)
 admin.site.register(TheoreticalContent)
 admin.site.register(StudentTheory)

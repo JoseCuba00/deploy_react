@@ -4,16 +4,13 @@ from rest_framework.views import APIView
 from django.shortcuts import redirect
 from . import serializers
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import mixins
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
-from rest_framework.decorators import api_view
 from google.cloud import texttospeech
 import logging
 from rest_framework import generics
-from django.http import Http404
 from .models import Students, Module, Topics, Questions,Assignments,StudentQuestion,StudentAssignments,TheoreticalContent,StudentTheory
-from user_visit.models import UserVisit
+
 from django.contrib.auth.models import User
 from rest_framework import status, views
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -25,6 +22,9 @@ from django.core.files.storage import default_storage
 from django.http import JsonResponse
 from langdetect import detect, DetectorFactory
 import re
+from datetime import date, timedelta
+from django.http import JsonResponse
+from .models import ClassSchedule
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -104,13 +104,13 @@ class ProfileImageView(generics.ListCreateAPIView):
     def get_queryset(self):
         pk = self.request.GET.get('student_id')
         return Students.objects.filter(id=pk)
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['student_id'] = self.request.GET.get('student_id')  # Pasar student_id al serializer
+        return context
 
 
-class ProfileDatesView(generics.ListCreateAPIView):
-    serializer_class = serializers.UserVisitsSerializer
-    def get_queryset(self):
-        pk = self.request.GET.get('student_id')
-        return UserVisit.objects.filter(id=pk)
 
 class ProfileImageViewUpdate(generics.UpdateAPIView):
     queryset = Students.objects.all()
@@ -165,6 +165,7 @@ class StudentTopicsListCreateAPIView(generics.ListCreateAPIView):
 class TheoryUpdate(generics.UpdateAPIView):
     queryset = StudentTheory.objects.all()
     serializer_class = serializers.StudentTheorySerializerUpdate
+
 
 
 @csrf_exempt

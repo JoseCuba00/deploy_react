@@ -100,11 +100,37 @@ class StudentTheory(models.Model):
     def __str__(self):
         return self.theory.title
 
+class Day_of_week(models.Model):
+    title = models.CharField(
+        max_length=10,
+        choices=[
+            ('Monday', 'Monday'),
+            ('Tuesday', 'Tuesday'),
+            ('Wednesday', 'Wednesday'),
+            ('Thursday', 'Thursday'),
+            ('Friday', 'Friday'),
+            ('Saturday', 'Saturday'),
+            ('Sunday', 'Sunday'),
+        ]
+    )
+
+    def __str__(self):
+        return self.title
+
+class ClassSchedule(models.Model):
+    student = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='class_schedules')
+    day_of_week = models.ManyToManyField(Day_of_week)
+    
+
+    def __str__(self):
+        return self.student.username
+
 @receiver(post_save, sender=Students)
 def create_student_assignments(sender, instance, created, **kwargs):
     if created:
         assignments = Assignments.objects.all()
         questions = Questions.objects.all()
+        theorys = TheoreticalContent.objects.all()
 
         for assignment in assignments:
             StudentAssignments.objects.create(
@@ -117,4 +143,12 @@ def create_student_assignments(sender, instance, created, **kwargs):
                 student=instance,
                 question=question,
                 completed=False
+            )   
+        
+        for theory in theorys:
+            StudentTheory.objects.create(
+                student=instance,
+                theory=theory,
+                completed=False
             )
+

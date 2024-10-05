@@ -1,0 +1,354 @@
+[33mcommit 147505e7585fd4840f8dc6b18fc86eff37f063f3[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin2/main[m[33m)[m
+Author: Jose Carlos <jose@email.com>
+Date:   Fri Sep 6 13:46:24 2024 +0200
+
+    cambiando la vista mobile
+
+[33mcommit 0c8eb6f4046e47d73f9b36809ca4519078331429[m
+Author: Jose Carlos <jose@email.com>
+Date:   Fri Sep 6 13:08:54 2024 +0200
+
+    centrando los quiz
+
+[33mcommit 5482edca52cbab857e82d89ad488530f7cf9bdc4[m
+Author: Jose Carlos <jose@email.com>
+Date:   Thu Sep 5 15:36:09 2024 +0200
+
+    mejorando el login
+
+[33mcommit 41a63c618d759af9a24fdcb840ae1aa0ccb21658[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Sep 4 15:24:18 2024 +0200
+
+    cambiando el fondo del login
+
+[33mcommit 0cba120122695bc44eb070117e4ec2ddebedd23a[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 13:49:43 2024 +0200
+
+    ultima prueba
+
+[33mcommit ab68c13f66df177acd47cdbe8e59bb5cf364980b[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 13:18:45 2024 +0200
+
+    anadiendo el import arriba
+
+[33mcommit 687b9b125ed1f453989f61b07bc247d0cf2c82e5[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 13:16:38 2024 +0200
+
+    anadiendo el import
+
+[33mcommit b0f5710a17e2ef54ccb5cd0ea4a4ab191f35ec5b[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 13:10:15 2024 +0200
+
+    cloudinary youtube
+
+[33mcommit dfecbe2f6188231be47c6dfb8318040ef433a513[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 12:53:23 2024 +0200
+
+    cambiando a cloudinary_storage
+
+[33mcommit 8beeb8b39d17aa1153587424d8fdd54019e8b830[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 12:37:11 2024 +0200
+
+    anadiendo cloudinary y requiremetns.txt
+
+[33mcommit 413e2f5b5cdb7819aeb616bf895c16733c59d58f[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 12:32:37 2024 +0200
+
+    anadiendo cloudinary
+
+[33mcommit f3cb438db1ab0f0fcd8650c2e1f8edda80f12bd1[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 28 11:17:40 2024 +0200
+
+    creando un json con las credenciales
+
+[33mcommit 8e45d677a4a9960353ca414664cd7484c7150497[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 15:32:01 2024 +0200
+
+    borrando google cred
+
+[33mcommit 881997791f135870aedb09dddfd58c4933b6daed[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 12:46:22 2024 +0200
+
+    cambaindo el fetch
+
+[33mcommit ada441d2e6dbf3e2e76d8fd5c64837b71e1fe0b1[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 12:33:23 2024 +0200
+
+    cambaindo el front
+
+[33mcommit 86be824d250996d5ad3aa53d82a0d912dc715cff[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 12:18:03 2024 +0200
+
+    desistanalando psycopg2
+
+[33mcommit c76d56fbc651a326bfed3b9dbe83d2fe6197cee6[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 12:14:36 2024 +0200
+
+    cambiando el csrf
+
+[33mcommit 3aaca7976349342f8b0e220e0339caa18cbe8d55[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 11:50:16 2024 +0200
+
+    anadiendo el csrf
+
+[33mcommit d4f01d085ff57157eb802eb263b1f3317eaf2e96[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 11:19:33 2024 +0200
+
+    cambiando whitenoise
+
+[33mcommit 9f533dee6ff93eb998aae510b711ec4aca60f918[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 11:13:49 2024 +0200
+
+    anadiendo whitenoise
+
+[33mcommit b43c6a56f74d5fc6e13ed11af93df59a57f691f5[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 10:51:43 2024 +0200
+
+    anadiendo staticfiles
+
+[33mcommit b581bfae6cfe9537ece7819e021a29d600e594a8[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 10:18:44 2024 +0200
+
+    cambiando procfile
+
+[33mcommit de32f8e076e6524ec25238fe0e8b6cf0c30ae7b6[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 10:11:52 2024 +0200
+
+    cambiando a railway
+
+[33mcommit 9dcb535f89e1e519064a5aa43c16b7eee2159033[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:48:51 2024 +0200
+
+    eliminando rewrites
+
+[33mcommit fdc9e87662c047e2d8327a54e5133fb2fa9bae38[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:48:00 2024 +0200
+
+    eliminando biuls.sh
+
+[33mcommit 03a5e921307d6b73d5bb60d8a8463f882d87549a[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:46:13 2024 +0200
+
+    anadiendo rewrites
+
+[33mcommit 3b17c1936098b584f1a4b216200f16d9b41a9308[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:43:14 2024 +0200
+
+    restaurando vercel.json
+
+[33mcommit 9630464961597670c6c752d81d9c6aaf73855be7[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:36:39 2024 +0200
+
+    eleminando rutas
+
+[33mcommit 5bfcdb516c8792ac22a170132feabebff0fe3da4[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:34:40 2024 +0200
+
+    cambiando vercel.json
+
+[33mcommit 7313d0217b4db3e8702f3e9a220f4810078a8cd4[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:30:29 2024 +0200
+
+    siguiendo youtube 3
+
+[33mcommit d3eb7d9a410d4c9ad65a58eccef1522951f8f22c[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:26:00 2024 +0200
+
+    siguiendo youtube 2
+
+[33mcommit 89749728ca4ac639ea9a75c9f7ff389ca83e71e1[m
+Author: Jose Carlos <jose@email.com>
+Date:   Tue Aug 27 09:25:16 2024 +0200
+
+    siguiendo youtube
+
+[33mcommit 52c304798eddd14797279f3abff9b9bd00d99d5c[m
+Author: Jose Carlos <jose@email.com>
+Date:   Mon Aug 26 15:02:48 2024 +0200
+
+    siguiendo las intrucciones
+
+[33mcommit bd334fc6b08e98bc65bde850c9f9208aae74942d[m
+Author: Jose Carlos <jose@email.com>
+Date:   Mon Aug 26 14:45:32 2024 +0200
+
+    cambiando vercel.json
+
+[33mcommit 87eecfc16a7d596f427e0a54a8d9ba2ff6a806b6[m
+Author: Jose Carlos <jose@email.com>
+Date:   Mon Aug 26 14:27:25 2024 +0200
+
+    cambiando a vercel
+
+[33mcommit 4650c560d9de01502e4ea4ec47c75d66ef2befae[m
+Author: Jose Carlos <jose@email.com>
+Date:   Mon Aug 26 12:10:37 2024 +0200
+
+    cambiando el admin.sites
+
+[33mcommit 79a57e085a2d01f6b10de88f18864f27b5bad904[m
+Author: Jose Carlos <jose@email.com>
+Date:   Mon Aug 26 11:27:43 2024 +0200
+
+    cambiando el settings.py
+
+[33mcommit e0774dac44b6c1d1e400f0ccc86d600f9b5d18f8[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sun Aug 25 13:44:35 2024 +0200
+
+    cambiando el allowed_host
+
+[33mcommit 762f0585604f74294accac8a7943f35bf9229891[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 15:45:31 2024 +0200
+
+    poniendo la url correcta
+
+[33mcommit a7312784c152179cbd084c264e4f24eefd4c8baf[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 15:25:30 2024 +0200
+
+    cambiando el fetch en el login correctamente
+
+[33mcommit 200940e08d03ccbea10a1de175798913d7b1a17a[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 15:20:55 2024 +0200
+
+    cambiando el fetch en el login
+
+[33mcommit c259709ab3dd8c3ba1600df653e2d7921384aa7f[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 13:43:42 2024 +0200
+
+    borro algo
+
+[33mcommit 4f450554cdc2120d60c26aba489716facb08bb1f[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 13:39:47 2024 +0200
+
+    anado build
+
+[33mcommit beea62e3c8a111ad8346ea800d1e17e8eb20d2e9[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 13:00:36 2024 +0200
+
+    desinstalando psycopg2
+
+[33mcommit 34f4858c043575fa0f5fe2d859a7b511c2dfa26d[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 12:55:53 2024 +0200
+
+    instalando psycopg2-binary
+
+[33mcommit 650ee6e1ecc4c51117291bf40bf8c43ff0f28059[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 12:33:04 2024 +0200
+
+    desintalando mysqlclient
+
+[33mcommit 99abcc241d8d2701f875d2cb3f3d06ab8300c919[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 12:22:55 2024 +0200
+
+    anadiendo req.text
+
+[33mcommit df92853530115dd962cc940176ca07cc09334ade[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 11:43:34 2024 +0200
+
+    cambiando error en endpoints
+
+[33mcommit 6e1a38a74145492b1047d00914bfb9d54d0b78d5[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 11:36:16 2024 +0200
+
+    cambiando error en endoints
+
+[33mcommit 98bd3d0baa5e33f3903937ac63ccdb7710317a5c[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 11:28:44 2024 +0200
+
+    cambiando la google key
+
+[33mcommit ea82f5b177be1aa3ae2d68275507645c7ab61d19[m
+Author: Jose Carlos <jose@email.com>
+Date:   Sat Aug 24 11:24:40 2024 +0200
+
+    con variables de entorno y base de datos en choreo
+
+[33mcommit 60db36bc8d26f873603446d0d381054e897c9dd1[m
+Author: Jose Carlos <jose@email.com>
+Date:   Fri Aug 23 16:00:03 2024 +0200
+
+    actualizando la verison de django
+
+[33mcommit 6a564e42a46a62d4f3291ebe9abb5ad5215b65f5[m
+Author: Jose Carlos <jose@email.com>
+Date:   Fri Aug 23 15:22:09 2024 +0200
+
+    Cambiando a choreo
+
+[33mcommit 9cf8ad39f6e4a99aa98ab7b18d2d849a26268b41[m
+Author: Jose Carlos <jose@email.com>
+Date:   Fri Aug 23 15:05:49 2024 +0200
+
+    Preparando el backend
+
+[33mcommit e756c5d4d296c03bbe6eed745c58d44b7767fcc6[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Aug 21 15:55:47 2024 +0200
+
+    cambie el css
+
+[33mcommit 5b906200df8041c06d84f6cc34331c3597c74926[m[33m ([m[1;31mdeploy/main[m[33m)[m
+Author: Jose Carlos <jose@email.com>
+Date:   Thu Aug 15 15:58:11 2024 +0200
+
+    Cambie
+
+[33mcommit af8dd99a12edb71a21a2442d109a4fa20c262f1d[m
+Author: Jose Carlos <jose@email.com>
+Date:   Thu Aug 15 15:36:04 2024 +0200
+
+    Deploy
+
+[33mcommit a486ef0fb8ef60da5ca2850e20e8d88e1f94c802[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Jul 10 18:37:45 2024 +0200
+
+    La viste de profil casi terminada, falta anadirle el funcionaamiento del
+    calendario
+
+[33mcommit 62b05a82fdfbffd3c34f47a84ad308d68ecc7223[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Jose Carlos <jose@email.com>
+Date:   Wed Jul 3 19:58:55 2024 +0200
+
+    Diseno de las vistas de los quiz terminado

@@ -19,7 +19,7 @@ function Profile() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `https://web-production-0a07.up.railway.app/api/get_profile_image?student_id=${user.id}`,
+        `http://localhost:8000/api/get_profile_image?student_id=${user.id}`,
         {
           credentials: "include",
         }
@@ -27,14 +27,8 @@ function Profile() {
 
       if (response.ok) {
         let json = await response.json();
-        console.log(json);
-        setUserVisits(
-          json[0].user_visits.map((visit) => {
-            let dateObject = new Date(visit.timestamp);
-            let dateFormatted = dateObject.toISOString().split("T")[0];
-            return dateFormatted;
-          })
-        );
+
+        setUserVisits(json[0].user_visits);
         setUserInfo(json);
       }
       setIsLoading(false);
@@ -132,7 +126,7 @@ function Profile() {
               )
                 .toISOString()
                 .slice(0, 10);
-
+              console.log(dateString);
               if (userVisits.includes(dateString)) {
                 return "enabled";
               }

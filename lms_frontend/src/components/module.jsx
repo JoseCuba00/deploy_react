@@ -31,7 +31,7 @@ function Module({ TopicData }) {
           isCollapsed ? "" : "active"
         } d-flex flex-column align-items-stretch flex-shrink-0 fixed`}
         style={{
-          background: "rgb(245,245,245)",
+          background: "white",
           position: "fixed",
           top: "109px",
           height: "calc(100vh - 110px)", // Ajusta la altura según sea necesario
