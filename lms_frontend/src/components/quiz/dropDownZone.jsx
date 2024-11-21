@@ -1,34 +1,34 @@
 import React from "react";
-import { convertToSpeech } from "../actions/actions";
 import Dropdown from "react-bootstrap/Dropdown";
+import HighlightFrase from "./HighlightFrase";
 
 const DropDownBlock = (props) => {
   const titleObject = props.title[props.boxIndex] || {
     title: "Select an item",
-  }; // evita el error de que el title es indefinido
+  };
+
+  // Determina las clases para el Dropdown.Toggle
+  let toggleClass = "dropdown-toggle";
+  if (titleObject.hasOwnProperty("isCorrect")) {
+    toggleClass += titleObject.isCorrect === true ? " correct" : " incorrect";
+  }
 
   return (
     <div className="d-inline-flex">
       <Dropdown className="d-inline-block">
         <Dropdown.Toggle
           id="dropdown-basic"
-          className="pt-2 pb-3 font-italic btn-sm fixed-width-toggle"
+          className={`pt-2 pb-3 font-italic btn-sm fixed-width-toggle ${toggleClass}`}
           disabled={props.disabled}
-          style={{
-            background: "rgb(167, 185, 219)",
-            borderRadius: "5px",
-            fontWeight: "600",
-          }}
         >
           {titleObject.title}
         </Dropdown.Toggle>
-        <Dropdown.Menu className={`w-100 fixed-width-menu`}>
+        <Dropdown.Menu className="w-100 fixed-width-menu">
           {props.objects?.map((obj, index) => (
             <Dropdown.Item
               key={index}
               onClick={() => {
                 props.clickFunction(props.boxIndex, obj.id, obj.title);
-                convertToSpeech(obj.title);
               }}
             >
               {obj.title}
@@ -48,7 +48,20 @@ const DropdownZone = (props) => {
         const [firstPart, secondPart] = sentence.title.split("...");
         return props.isText ? (
           <React.Fragment key={boxIndex}>
-            <span>&nbsp;{firstPart}&nbsp;</span>
+            <HighlightFrase
+              personalized_class={"not-text"}
+              index={`${boxIndex}-A`}
+              oracion={firstPart}
+              activeIndex={props.activeIndex}
+              setActiveIndex={props.setActiveIndex}
+              ref={(el) => {
+                if (!props.refs.current[boxIndex])
+                  props.refs.current[boxIndex] = {};
+                props.refs.current[boxIndex].A = el; // Almacena la referencia para 'A'
+              }}
+              SaveAudio={props.SaveAudio}
+            />
+
             <DropDownBlock
               disabled={props.disabled}
               title={props.title}
@@ -56,12 +69,42 @@ const DropdownZone = (props) => {
               boxIndex={boxIndex}
               objects={props.objects}
             />
-            <span>&nbsp;{secondPart}</span>
+            <span>
+              <HighlightFrase
+                personalized_class={"not-text"}
+                index={`${boxIndex}-B`}
+                oracion={secondPart}
+                activeIndex={props.activeIndex}
+                setActiveIndex={props.setActiveIndex}
+                ref={(el) => {
+                  if (!props.refs.current[boxIndex])
+                    props.refs.current[boxIndex] = {};
+                  props.refs.current[boxIndex].B = el; // Almacena la referencia para 'B'
+                }}
+                SaveAudio={props.SaveAudio}
+              />
+            </span>
           </React.Fragment>
         ) : (
           <div key={boxIndex}>
             <span>
-              {boxIndex + 1}-&nbsp;{firstPart}&nbsp;
+              {boxIndex + 1}-&nbsp;
+              {
+                <HighlightFrase
+                  personalized_class={"not-text"}
+                  index={`${boxIndex}-A`}
+                  oracion={firstPart}
+                  activeIndex={props.activeIndex}
+                  setActiveIndex={props.setActiveIndex}
+                  ref={(el) => {
+                    if (!props.refs.current[boxIndex])
+                      props.refs.current[boxIndex] = {};
+                    props.refs.current[boxIndex].A = el; // Almacena la referencia para 'A'
+                  }}
+                  SaveAudio={props.SaveAudio}
+                />
+              }
+              &nbsp;
             </span>
             <DropDownBlock
               disabled={props.disabled}
@@ -70,7 +113,24 @@ const DropdownZone = (props) => {
               boxIndex={boxIndex}
               objects={props.objects}
             />
-            <span>&nbsp;{secondPart}</span>
+            <span>
+              &nbsp;
+              {
+                <HighlightFrase
+                  personalized_class={"not-text"}
+                  index={`${boxIndex}-B`}
+                  oracion={secondPart}
+                  activeIndex={props.activeIndex}
+                  setActiveIndex={props.setActiveIndex}
+                  ref={(el) => {
+                    if (!props.refs.current[boxIndex])
+                      props.refs.current[boxIndex] = {}; // Si no existe el ref de esa oracion o caja , lo crea
+                    props.refs.current[boxIndex].B = el; // Almacena la referencia para 'B' de esa oracion o caja
+                  }}
+                  SaveAudio={props.SaveAudio}
+                />
+              }
+            </span>
           </div>
         );
       })}

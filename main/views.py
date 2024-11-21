@@ -10,7 +10,7 @@ from google.cloud import texttospeech
 import logging
 from rest_framework import generics
 from .models import Students, Module, Topics, Questions,Assignments,StudentQuestion,StudentAssignments,TheoreticalContent,StudentTheory
-
+from googletrans import Translator
 from django.contrib.auth.models import User
 from rest_framework import status, views
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -25,7 +25,10 @@ import re
 from datetime import date, timedelta
 from django.http import JsonResponse
 from .models import ClassSchedule
-
+from elevenlabs.client import ElevenLabs
+import requests
+import boto3 # Biblioteca para subir archivos a Yandex S3
+from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 logger = logging.getLogger(__name__)
 # Create your views here.
 
@@ -79,21 +82,56 @@ def convert_text_to_speech(request):
         return HttpResponse(status=400, content='Text is required')
     
     if not re.match(r'^[\u0400-\u04FF\s,.!?\'"()]+$', text): # si el texto no tiene letras latinas no ejecutar el codigo de Text-to-Speech
-        client = texttospeech.TextToSpeechClient()
-        synthesis_input = texttospeech.SynthesisInput(text=text)
-        voice = texttospeech.VoiceSelectionParams(language_code='es-ES', ssml_gender=texttospeech.SsmlVoiceGender.MALE)
-        audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
 
-        response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
-        audio_content = response.audio_content
 
-        return HttpResponse(audio_content, content_type='audio/mpeg')
+        client = ElevenLabs(
+        api_key= settings.ELEVEN_LABS_KEY # Defaults to ELEVEN_API_KEY
+        )
+        audio = client.generate(
+                text=text,
+                voice="Liam",
+                model="eleven_multilingual_v2",
+                stream=True
+                )
+
+        return HttpResponse(audio, content_type='audio/mpeg')
 
     return HttpResponse(status=204) # Este codigo significa que la solicitud fue exitosa pero no hay contenido que devolver
     
     # Crear cliente de Text-to-Speech
     
 
+@api_view(['POST'])
+def translate_text(request):
+
+    text = request.data.get('text', '')
+    
+    url = "https://translate.api.cloud.yandex.net/translate/v2/translate"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Api-Key {settings.YANDEX_TRANSLATE_KEY}",
+       
+    }
+    data = {
+        "sourceLanguageCode": "es",
+        "targetLanguageCode": "ru",
+        "texts": [text]
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()  # Lanza un error si la respuesta es un error HTTP
+
+        translated_data = response.json()
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Error al traducir: {e}")
+    
+
+    data = translated_data['translations'][0]['text']
+    
+    return JsonResponse({text:data}) # Este codigo significa que la solicitud fue exitosa pero no hay contenido que devolver
+    
 class ChangePasswordView(generics.UpdateAPIView):
 
     queryset = Students.objects.all()
@@ -167,23 +205,36 @@ class TheoryUpdate(generics.UpdateAPIView):
     serializer_class = serializers.StudentTheorySerializerUpdate
 
 
-
 @csrf_exempt
 def custom_upload_function(request):
     if request.method == 'POST' and request.FILES.get('upload'):
         upload = request.FILES['upload']
-        upload_path = os.path.join( settings.MEDIA_ROOT, 'ckeditor', upload.name)
-        
-        with default_storage.open(upload_path, 'wb+') as destination:
-            for chunk in upload.chunks():
-                destination.write(chunk)
-        
-        # Construye la URL completa para el archivo subido
-        file_url = f"https://127.0.0.1:8000{settings.MEDIA_URL}ckeditor/{upload.name}" # Ruta para acceder al archivo
+        file_name = upload.name
 
-        print(file_url)
-        return JsonResponse({
-            'uploaded': True,
-            'url': file_url
-        })
+        session = boto3.session.Session(
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            region_name=settings.AWS_S3_REGION_NAME
+        )
+
+        s3 = session.client(
+            service_name='s3',
+            endpoint_url=settings.AWS_S3_ENDPOINT_URL
+        )
+
+        try:
+            # Subir el archivo a Yandex Object Storage
+            s3.upload_fileobj(upload, settings.AWS_STORAGE_BUCKET_NAME, file_name)
+            # Construir la URL del archivo subido
+            file_url = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{file_name}"
+
+            return JsonResponse({
+                'uploaded': True,
+                'url': file_url
+            })
+        except (NoCredentialsError, PartialCredentialsError) as e:
+            return JsonResponse({
+                'uploaded': False,
+                'error': str(e)
+            })
     return JsonResponse({'uploaded': False})

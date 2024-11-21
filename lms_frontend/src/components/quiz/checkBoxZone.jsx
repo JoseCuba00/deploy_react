@@ -9,11 +9,23 @@ const CheckBoxZone = (props) => {
           const isSelected = props.selectedChoices.some(
             (selectedChoice) => selectedChoice.id === choice.id
           );
+          let personalized_class = "";
+          if (props.disabled) {
+            personalized_class = props.selectedChoices.some(
+              (selectedChoice) =>
+                selectedChoice.id === choice.id && selectedChoice.IsCorrect
+            )
+              ? "correct"
+              : "incorrect";
+          }
           return (
             <div className="pb-2" key={index}>
               <div
                 className={`ps-2 form-check boton-quiz ${
-                  isSelected && `selected ${props.disabled && "isDisabled"}`
+                  isSelected &&
+                  (props.disabled
+                    ? `isDisabled ${personalized_class}`
+                    : "selected")
                 }`}
                 key={choice.id}
                 onClick={(e) => {

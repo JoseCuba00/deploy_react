@@ -4,7 +4,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-
+import React, { useEffect } from "react";
 // Otros componentes importados aquí
 import Header from "./header";
 import DrapDropQuiz from "./quiz/DrapDropQuiz";

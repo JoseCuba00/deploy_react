@@ -2,16 +2,20 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { convertToSpeech } from "../actions/actions";
 
 const ClickToRowZone = (props) => {
-  //convertToSpeech(word.title);
+  console.log("rox");
   return (
-    <div className={`${props.id === "row2" && "click-quiz-main"} ps-4`}>
+    <div
+      className={`${props.id === "row2" ? "click-quiz-main" : "pt-4"} ps-4 `}
+    >
       <Droppable droppableId={props.id} direction="horizontal">
         {(provided) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={`${
-              props.id === "row1" ? "click-quiz-sentences " : "click-quiz-words"
+              props.id === "row1"
+                ? "click-quiz-sentences  "
+                : "click-quiz-words"
             } `}
           >
             {props.id === "row1" && (
@@ -33,14 +37,15 @@ const ClickToRowZone = (props) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    onClick={() => {
+                    onClick={async () => {
                       if (!props.disabled) {
                         const setFrom =
                           props.id === "row1" ? props.setRow1 : props.setRow2;
                         const setTo =
                           props.id === "row1" ? props.setRow2 : props.setRow1;
                         props.onClickFunction(word, setFrom, setTo);
-                        convertToSpeech(word.title);
+                        const audio = await convertToSpeech(word.title);
+                        audio.play();
                       }
                     }}
                     style={{

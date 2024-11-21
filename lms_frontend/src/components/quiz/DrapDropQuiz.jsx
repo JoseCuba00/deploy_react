@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { DroppableZoneMain, DroppableZoneSentence } from "./drapDropZone";
 import { ChangeData } from "../actions/actions";
 import { QuizBottons } from "../quizBottons";
 import LoadingIndicator from "../LoadingIndicator";
 import styled from "styled-components";
+import { convertToSpeech } from "../actions/actions";
 
 const FullContainer = styled.div`
   width: 90%;
@@ -16,6 +17,33 @@ const FullContainer = styled.div`
     justify-content: space-between;
   `}
 `;
+
+const initializeShuffledChoices = (sentencesList, shuffleArray, choices) => {
+  let defaultObjects = sentencesList.map(() => []);
+  defaultObjects.splice(
+    0,
+    0,
+    JSON.parse(JSON.stringify(shuffleArray(choices)))
+  );
+  return defaultObjects;
+};
+
+const initializeCompletedChoices = (sentencesList, choices, answers) => {
+  let defaultObjects = sentencesList.map(() => []);
+  defaultObjects = defaultObjects.map((obj, index) => {
+    const foundItem = choices.find((item) => item.id === answers[index]);
+    return [{ ...foundItem, isCorrect: true }]; // para anadirle la propiedad esCorrect al array
+  });
+  const remainingChoices = choices.filter(
+    // los objetos restantes
+    (choice) => !answers.includes(choice.id)
+  );
+
+  // Insertar los objetos restantes en el índice 0
+  defaultObjects.splice(0, 0, remainingChoices);
+
+  return defaultObjects;
+};
 
 const DragDropQuiz = ({
   sentencesList,
@@ -33,57 +61,78 @@ const DragDropQuiz = ({
   isText,
   userId,
 }) => {
-  const initializeShuffledChoices = useCallback(() => {
-    let defaultObjects = sentencesList.map(() => []);
-    defaultObjects.splice(
-      0,
-      0,
-      JSON.parse(JSON.stringify(shuffleArray(choices)))
-    );
-    return defaultObjects;
-  }, [choices, sentencesList, shuffleArray]);
-
   const [showResult, setShowResult] = useState(false);
-  const [shuffledChoices, setShuffledChoices] = useState(
-    initializeShuffledChoices
+  const [shuffledChoices, setShuffledChoices] = useState(() =>
+    initializeShuffledChoices(sentencesList, shuffleArray, choices)
   );
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const refs = useRef({});
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [audios, setAudios] = useState({});
+  console.log(shuffledChoices);
+  const handleClickOutside = useCallback((event) => {
+    if (
+      Object.values(refs.current).every(
+        (subRefs) =>
+          subRefs.A &&
+          subRefs.B &&
+          !subRefs.A.contains(event.target) &&
+          !subRefs.B.contains(event.target)
+      )
+    ) {
+      setActiveIndex(null);
+    }
+  }, []);
 
-  // Effect to handle initialization of the question
   useEffect(() => {
-    const initializeQuestion = () => {
-      setShowResult(false);
-      setCompleted(false);
-      setShuffledChoices(initializeShuffledChoices());
-      setLoading(true);
+    document.addEventListener("mousedown", handleClickOutside);
 
-      if (isCompleted) {
-        let defaultObjects = sentencesList.map(() => []);
-        defaultObjects = defaultObjects.map((obj, index) => {
-          const foundItem = choices.find((item) => item.id === answers[index]);
-          return [foundItem];
-        });
-        defaultObjects.splice(0, 0, []);
+    if (isCompleted) {
+      setShuffledChoices(
+        initializeCompletedChoices(sentencesList, choices, answers)
+      );
+      setShowResult(true);
+      setCompleted(true);
+    } else {
+      setShuffledChoices(
+        initializeShuffledChoices(sentencesList, shuffleArray, choices)
+      );
+    }
+    setLoading(false);
 
-        setShuffledChoices(defaultObjects);
-        setShowResult(true);
-        setCompleted(true);
-      }
-      if (shuffledChoices.length > 0) {
-        setLoading(false);
-      }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-
-    initializeQuestion();
   }, [
     choices,
     questionId,
-    initializeShuffledChoices,
     sentencesList,
     answers,
     isCompleted,
+    shuffleArray,
+    handleClickOutside,
   ]);
+
+  const SaveAudio = async (oracion, index) => {
+    if (audios[index]) {
+      audios[index].play();
+      return;
+    }
+
+    try {
+      const audio = await convertToSpeech(oracion);
+      if (audio) {
+        audio.play();
+        setAudios((prevAudios) => ({
+          ...prevAudios,
+          [index]: audio,
+        }));
+      }
+    } catch (error) {
+      console.error("Error al traducir:", error);
+    }
+  };
 
   const handleOnDragEnd = useCallback(
     (result) => {
@@ -98,27 +147,25 @@ const DragDropQuiz = ({
       }
 
       const getId = choices.find((objeto) => objeto.title === draggableId);
+      const updatedChoices = [...shuffledChoices];
 
-      if (result.destination.droppableId === result.source.droppableId) {
-        const updatedChoices = [...shuffledChoices];
+      if (destination.droppableId === source.droppableId) {
         updatedChoices[source.droppableId].splice(source.index, 1);
         updatedChoices[destination.droppableId].splice(destination.index, 0, {
           id: getId.id,
           title: draggableId,
         });
-        setShuffledChoices(updatedChoices);
       } else if (
         shuffledChoices[destination.droppableId].length === 0 ||
-        result.destination.droppableId === "0"
+        destination.droppableId === "0"
       ) {
-        const updatedChoices = [...shuffledChoices];
         updatedChoices[source.droppableId].splice(source.index, 1);
         updatedChoices[destination.droppableId].push({
           id: getId.id,
           title: draggableId,
         });
-        setShuffledChoices(updatedChoices);
       }
+      setShuffledChoices(updatedChoices);
     },
     [shuffledChoices, choices]
   );
@@ -126,11 +173,11 @@ const DragDropQuiz = ({
   const onClickSubmit = async () => {
     let score = 0;
     let updatedChoices;
+
     try {
       updatedChoices = shuffledChoices.map((obj, index) => {
         if (index === 0) return obj;
         let isCorrect = obj[0].id === answers[index - 1];
-
         if (isCorrect) score++;
         return [{ ...obj[0], isCorrect }];
       });
@@ -173,11 +220,12 @@ const DragDropQuiz = ({
 
   const onClickReset = useCallback(() => {
     setShowResult(false);
-    setShuffledChoices(initializeShuffledChoices());
+    setShuffledChoices(
+      initializeShuffledChoices(sentencesList, shuffleArray, choices)
+    );
     setCompleted(false);
-  }, [initializeShuffledChoices]);
-
-  console.log(isText);
+  }, [sentencesList, shuffleArray, choices]);
+  console.log(shuffledChoices);
   return (
     <div className="QuestionsContainer">
       <div className="text">
@@ -192,6 +240,10 @@ const DragDropQuiz = ({
                   objects={shuffledChoices}
                   disabled={showResult}
                   isText={isText}
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+                  refs={refs}
+                  SaveAudio={SaveAudio}
                 />
 
                 <DroppableZoneMain

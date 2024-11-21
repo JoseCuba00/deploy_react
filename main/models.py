@@ -26,7 +26,8 @@ class Topics(models.Model):
 
 class Students(AbstractUser): # Heredar la clase User
     phone_number = models.CharField(max_length=12)
-    profile_image = models.FileField(upload_to='profile_images/', default='profile_images/defaultImgProfile.png')
+    profile_image = models.ImageField(upload_to='profileimages0/', default='profileimages0q/defaultImgProfile.png')
+    
     class Meta:
         db_table = "Students"
 
@@ -59,9 +60,9 @@ class Sentences(models.Model):
 class Questions(models.Model):
     assignments = models.ForeignKey(Assignments,  on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    sentences = models.ManyToManyField(Sentences)
+    sentences = models.ManyToManyField(Sentences, blank=True)
     choices = models.ManyToManyField(Choices)
-    answer = models.ManyToManyField(Choices, related_name='answer')
+    answer = models.ManyToManyField(Choices, related_name='answer', blank=True)
     isText = models.BooleanField()
     type = models.SmallIntegerField()
    

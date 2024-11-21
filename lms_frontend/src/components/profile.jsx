@@ -40,14 +40,14 @@ function Profile() {
   const onFileChange = async (event) => {
     const formData = new FormData();
     formData.append(
-      "profile_image",
+      "profileimage00",
       event.target.files[0],
       event.target.files[0].name
     );
 
     try {
       const response = await axios.put(
-        `https://web-production-0a07.up.railway.app/api/profile_image/${user.id}`,
+        `http://127.0.0.1:8000/api/profile_image/${user.id}`,
         formData,
         {
           headers: {
@@ -60,6 +60,7 @@ function Profile() {
     }
     window.location.reload(); // Recargar la pagina para que se actualice la foto
   };
+  console.log(userInfo);
 
   return isLoading ? (
     <div className="d-flex align-items-center justify-content-center vh-100">
@@ -76,7 +77,7 @@ function Profile() {
       }}
     >
       <div className="d-flex flex-column">
-        <img className="img_profile " src={userInfo[0].profile_image}></img>
+        <img className="img_profile " src={userInfo[0].profileimage00}></img>
         <h5 style={{ fontWeight: 600, paddingTop: "23px" }}>
           Personal information{" "}
         </h5>
@@ -126,7 +127,7 @@ function Profile() {
               )
                 .toISOString()
                 .slice(0, 10);
-              console.log(dateString);
+
               if (userVisits.includes(dateString)) {
                 return "enabled";
               }

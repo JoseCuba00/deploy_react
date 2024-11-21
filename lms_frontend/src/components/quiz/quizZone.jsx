@@ -2,6 +2,8 @@ import React from "react";
 import { convertToSpeech } from "../actions/actions";
 
 const QuizZone = (props) => {
+  console.log(props.IsCorrect);
+
   return (
     <div className="d-flex flex-column">
       <div className="pt-4">
@@ -9,9 +11,15 @@ const QuizZone = (props) => {
           props.choices.map((choice, index) => (
             <div className="pb-2" key={index}>
               <div
-                className={` ps-2 form-check boton-quiz  ${
-                  props.selectedAnswer === choice.id
-                    ? `selected ${props.disabled && "isDisabled"}`
+                className={`ps-2 form-check boton-quiz ${
+                  props.disabled
+                    ? props.selectedAnswer === choice.id
+                      ? props.IsCorrect
+                        ? "correct isDisabled"
+                        : "incorrect isDisabled"
+                      : ""
+                    : props.selectedAnswer === choice.id
+                    ? "selected"
                     : ""
                 }`}
                 key={choice.id}

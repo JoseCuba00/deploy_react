@@ -17,6 +17,8 @@ import TaskNavbar from "./TaskNavbar";
 import AuthContext from "../context/AuthContext";
 import LoadingIndicator from "./LoadingIndicator";
 import TheoryComponent from "./theory/theoryComponent";
+import Text from "./quiz/Text";
+import QuizFoto from "./quiz/QuizFoto";
 
 const quizComponents = {
   1: RadioQuiz,
@@ -25,6 +27,7 @@ const quizComponents = {
   4: SelectQuiz,
   5: DragDropQuiz,
   6: ClickToRowQuiz,
+  7: QuizFoto,
 };
 
 const shuffleArray = (array) => {

@@ -1,11 +1,10 @@
 import React from "react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { CheckBoxZone } from "./checkBoxZone";
 import { ChangeData } from "../actions/actions";
 import { QuizBottons } from "../quizBottons";
 import LoadingIndicator from "../LoadingIndicator";
-import { convertToSpeech } from "../actions/actions";
-import HeadingQuestions from "../headingQuestion";
+import SentenceRecorder from "../SentenceRecorder";
 
 const CheckBoxQuiz = ({
   sentencesList,
@@ -33,12 +32,13 @@ const CheckBoxQuiz = ({
   );
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  console.log(questionId, assignments_id, userId);
+
   useEffect(() => {
     const initializeQuestion = () => {
       if (isCompleted) {
-        setSelectedCheckboxes(answers.map((answer) => ({ id: answer })));
+        setSelectedCheckboxes(
+          answers.map((answer) => ({ id: answer, IsCorrect: true }))
+        );
         SetShowResult(true);
         setCompleted(true);
         setLoading(false);
@@ -85,7 +85,7 @@ const CheckBoxQuiz = ({
         score--;
       }
     });
-
+    console.log(selectedCheckboxes);
     SetShowResult(true);
 
     if (score === answers.length) {
@@ -127,12 +127,13 @@ const CheckBoxQuiz = ({
             <div className="ps-4">
               <div className="ps-3">
                 <h4 className="pb-3">Select all the correct answers</h4>
-                <HeadingQuestions
-                  convertToSpeech={convertToSpeech}
+
+                <SentenceRecorder
                   sentence={sentencesList[0].title}
-                  setIsPlaying={setIsPlaying}
-                  isPlaying={isPlaying}
-                  animate={true}
+                  showPlayButton
+                  playSize={24}
+                  cancelSize={20}
+                  microphoneSize={24}
                 />
               </div>
               <CheckBoxZone

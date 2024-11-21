@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { convertToSpeech } from "../actions/actions";
-
+import HighlightFrase from "./HighlightFrase";
+import { Button } from "antd/es/radio";
 const Container = styled.div`
+  position: relative;
+  top: 1px;
   transition: background-color 0.5s ease;
   background-color: ${(props) =>
     props.$isdraggingover ? "lightgreen" : "#e0eff1"};
   width: 120px;
-  height: 20px;
+  height: 17px;
+  min-height: 17px;
   display: inline-flex;
   margin-bottom: 0;
   justify-content: center;
@@ -17,16 +21,18 @@ const Container = styled.div`
 `;
 
 const ContainerMain = styled.div`
-  background-color: rgb(245, 245, 245);
+  background-color: #e0eff1;
   border-radius: 20px;
   width: ${(props) => (props.$isText ? "100%" : "180px")};
-  height: ${(props) => (props.$isText ? "100px" : "100%")};
+  ${(props) => (props.$isText ? "min-height : 60px" : "height :100%")};
   @media (max-width: 768px) {
     width: ${(props) => (props.$isText ? "100%" : "80px")};
     min-height: ${(props) => (props.$isText ? "150px" : "100%")};
   }
+  display: flex; // Añadido: asegúrate de que los elementos internos no colapsen el contenedor
+  justify-content: center; // Añadido: centrar elementos para evitar desplazamientos
+  align-items: center; // Añadido: centrar elementos para evitar desplazamientos
 `;
-
 const DroppableZoneMain = (props) => {
   return (
     <div className="pt-5 ps-3 ">
@@ -69,17 +75,25 @@ const DroppableZoneMain = (props) => {
     </div>
   );
 };
-
 const DroppableBlock = ({ index, objects, disabled }) => (
   <Droppable droppableId={`${index + 1}`} className="align-self-center">
     {(provided, snapshot) => (
-      <div className="d-inline-flex" style={{ width: "120px" }}>
+      <div
+        style={{
+          display: "inline-grid",
+          width: "120px",
+          height: "17px",
+          alignItems: "center",
+
+          position: "relative",
+        }}
+      >
         <div className="dropContainer">
           <Container
-            $isdraggingover={snapshot.isDraggingOver ? "true" : ""} // $ indica que es un transient props que evita que esa props sea enviada al DOM
+            $isdraggingover={snapshot.isDraggingOver ? "true" : ""}
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="row"
+            className={`row `}
           >
             {objects?.map((obj, index) => (
               <Draggable
@@ -95,9 +109,10 @@ const DroppableBlock = ({ index, objects, disabled }) => (
                   return (
                     <p
                       onMouseDown={() => convertToSpeech(obj.title)}
-                      className={`btn boton-draggable ${
-                        disabled && "isDisabled"
-                      }`}
+                      className={`btn boton-draggable inDroppableZone ${
+                        disabled && (obj.isCorrect ? "correct" : "incorrect")
+                      } ${disabled && "isDisabled"}
+                      `}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
@@ -129,25 +144,79 @@ const DroppableZoneSentence = (props) => {
         const [firstPart, secondPart] = sentence.title.split("...");
         return props.isText ? (
           <React.Fragment key={index}>
-            <span>&nbsp;{firstPart}</span>
-            <DroppableBlock
-              index={index}
-              objects={props.objects[index + 1] || []}
-              disabled={props.disabled}
-            />
-            <span>{secondPart}</span>
-          </React.Fragment>
-        ) : (
-          <div key={index}>
             <span>
-              {index + 1}-&nbsp;{firstPart}
+              &nbsp;
+              {
+                <HighlightFrase
+                  personalized_class={"is-drag"}
+                  index={`${index}-A`}
+                  oracion={firstPart}
+                  activeIndex={props.activeIndex}
+                  setActiveIndex={props.setActiveIndex}
+                  ref={(el) => {
+                    if (!props.refs.current[index])
+                      props.refs.current[index] = {};
+                    props.refs.current[index].A = el; // Almacena la referencia para 'B'
+                  }}
+                  SaveAudio={props.SaveAudio}
+                />
+              }
             </span>
             <DroppableBlock
               index={index}
               objects={props.objects[index + 1] || []}
               disabled={props.disabled}
             />
-            <span>{secondPart}</span>
+            <HighlightFrase
+              personalized_class={"is-drag"}
+              index={`${index}-B`}
+              oracion={secondPart}
+              activeIndex={props.activeIndex}
+              setActiveIndex={props.setActiveIndex}
+              ref={(el) => {
+                if (!props.refs.current[index]) props.refs.current[index] = {};
+                props.refs.current[index].B = el; // Almacena la referencia para 'B'
+              }}
+              SaveAudio={props.SaveAudio}
+            />
+          </React.Fragment>
+        ) : (
+          <div key={index}>
+            <span>
+              {index + 1}-&nbsp;
+              {
+                <HighlightFrase
+                  personalized_class={"is-drag"}
+                  index={`${index}-A`}
+                  oracion={firstPart}
+                  activeIndex={props.activeIndex}
+                  setActiveIndex={props.setActiveIndex}
+                  ref={(el) => {
+                    if (!props.refs.current[index])
+                      props.refs.current[index] = {};
+                    props.refs.current[index].A = el; // Almacena la referencia para 'B'
+                  }}
+                  SaveAudio={props.SaveAudio}
+                />
+              }
+            </span>
+            <DroppableBlock
+              index={index}
+              objects={props.objects[index + 1] || []}
+              disabled={props.disabled}
+            />
+            <HighlightFrase
+              personalized_class={"is-drag"}
+              index={`${index}-B`}
+              oracion={secondPart}
+              activeIndex={props.activeIndex}
+              setActiveIndex={props.setActiveIndex}
+              ref={(el) => {
+                if (!props.refs.current[index]) props.refs.current[index] = {};
+                props.refs.current[index].A = el; // Almacena la referencia para 'B'
+              }}
+              SaveAudio={props.SaveAudio}
+            />
           </div>
         );
       })}

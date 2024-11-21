@@ -61,7 +61,7 @@ const ChangeData = async (
   });
 };
 
-const convertToSpeech = async (text, enableAnimation, setIsPlaying) => {
+const convertToSpeech = async (text) => {
   console.log("Me activo");
   try {
     const response = await axios.post(
@@ -81,15 +81,8 @@ const convertToSpeech = async (text, enableAnimation, setIsPlaying) => {
     const audioUrl = URL.createObjectURL(audioBlob);
     // Crear un nuevo objeto de Audio y reproducirlo
     const newAudio = new Audio(audioUrl);
-    if (enableAnimation) {
-      console.log("Entro al if");
-      // Establecer el estado a 'true' cuando comience la reproducción
-      newAudio.onplay = () => setIsPlaying(true);
 
-      // Establecer el estado a 'false' cuando termine la reproducción
-      newAudio.onended = () => setIsPlaying(false);
-    }
-    newAudio.play();
+    return newAudio;
   } catch (error) {
     console.error("Error converting text to speech:", error);
   }

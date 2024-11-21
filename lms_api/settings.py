@@ -26,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
-
+YANDEX_TRANSLATE_KEY = os.getenv("YANDEX_TRANSLATE_KEY")
+ELEVEN_LABS_KEY= os.getenv("ELEVEN_LABS_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     "django_ckeditor_5", # Para crear contenido HTML mas facil 
     'cloudinary',
     'cloudinary_storage', # Para poder user cloudinary
+    "storages",# Para guardar los archivos en Yandex S3
     
 
 ]
@@ -338,7 +340,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 
-CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "custom_upload_file"
+CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "custom_upload_file" # La URL que buscara para activar la funcion de guardado de los files
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png'] # optional
 
@@ -356,11 +358,18 @@ temp_file.close()
 # Establecer la variable de entorno GOOGLE_APPLICATION_CREDENTIALS a la ruta del archivo temporal
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
-    'API_KEY': os.getenv("API_KEY"),
-    'API_SECRET': os.getenv("API_SECRET")
-}	
+	
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' # Para guardar las cosas en Yandex s3
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_ENDPOINT_URL = 'https://storage.yandexcloud.net'
+AWS_S3_REGION_NAME = 'ru-central1'  # Ajusta esto si estás utilizando una región diferente
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.storage.yandexcloud.net'
+
+# Configuración adicional opcional
+AWS_QUERYSTRING_AUTH = False  # Para evitar que los enlaces de S3 expiren
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

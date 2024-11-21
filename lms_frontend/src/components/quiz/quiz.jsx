@@ -4,8 +4,13 @@ import { QuizZone } from "./quizZone";
 import { QuizBottons } from "../quizBottons";
 import { ChangeData } from "../actions/actions";
 import LoadingIndicator from "../LoadingIndicator";
+<<<<<<< HEAD
 import { convertToSpeech } from "../actions/actions";
 import HeadingQuestions from "../headingQuestion";
+=======
+
+import SentenceRecorder from "../SentenceRecorder";
+>>>>>>> 60d8a20 (tratando de ver si se guardar las img de perfil en Yandex sin los archivos pycache)
 
 const RadioQuiz = ({
   sentencesList,
@@ -32,8 +37,12 @@ const RadioQuiz = ({
   const [shuffledChoices, setShuffledChoices] = useState([]);
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
   const [isPlaying, setIsPlaying] = useState(false);
   console.log(questionId, assignments_id, userId);
+=======
+
+>>>>>>> 60d8a20 (tratando de ver si se guardar las img de perfil en Yandex sin los archivos pycache)
   // Effect to handle loading and resetting question data
   useEffect(() => {
     const initializeQuestion = () => {
@@ -48,6 +57,7 @@ const RadioQuiz = ({
         setAnswerId(answers[0]);
         SetShowResult(true);
         setCompleted(true);
+        SetIsCorrect(true);
       }
     };
 
@@ -100,12 +110,21 @@ const RadioQuiz = ({
             <div className="ps-4">
               <div className="ps-3">
                 <h4 className="pb-3">Select the correct answer</h4>
+<<<<<<< HEAD
                 <HeadingQuestions
                   convertToSpeech={convertToSpeech}
                   sentence={sentencesList[0].title}
                   setIsPlaying={setIsPlaying}
                   isPlaying={isPlaying}
                   animate={true}
+=======
+                <SentenceRecorder
+                  sentence={sentencesList[0].title}
+                  showPlayButton={true}
+                  playSize={24}
+                  cancelSize={20}
+                  microphoneSize={24}
+>>>>>>> 60d8a20 (tratando de ver si se guardar las img de perfil en Yandex sin los archivos pycache)
                 />
               </div>
               <QuizZone

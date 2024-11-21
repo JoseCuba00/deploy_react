@@ -1,9 +1,10 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import SelectZone from "./selectedZone";
 import { ChangeData } from "../actions/actions";
 import { QuizBottons } from "../quizBottons";
 import LoadingIndicator from "../LoadingIndicator";
 // Usar un estado local para las elecciones seleccionadas
+import { convertToSpeech } from "../actions/actions";
 
 const SelectQuiz = ({
   sentencesList,
@@ -37,6 +38,9 @@ const SelectQuiz = ({
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [shuffledChoices, setShuffledChoices] = useState(choicesTransform);
+  const refs = useRef({}); // donde se van a guardar todas las ref de las oraciones
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [audios, setAudios] = useState({});
 
   const updateSelected = (box, obj, answers) => {
     if (!obj) return; // Prevent error if obj is undefined
@@ -48,10 +52,48 @@ const SelectQuiz = ({
     });
   };
 
+  const handleClickOutside = useCallback((event) => {
+    // Revisamos cada elemento en refs.current
+    console.log(refs);
+    if (
+      Object.values(refs.current).every(
+        (subRefs) =>
+          subRefs.A &&
+          subRefs.B && // Comprobar que ambas referencias existen
+          !subRefs.A.contains(event.target) && // Si el clic fue fuera de A
+          !subRefs.B.contains(event.target) // Y fuera de B
+      )
+    ) {
+      setActiveIndex(null);
+    }
+  }, []);
+
+  const SaveAudio = async (oracion, index) => {
+    if (audios[index]) {
+      audios[index].play();
+      return;
+    }
+
+    try {
+      const audio = await convertToSpeech(oracion);
+      if (audio) {
+        audio.play();
+        setAudios((prevAudios) => ({
+          // guardar el audio para no tener que volver hacer la llamada a la api
+          ...prevAudios,
+          [index]: audio,
+        }));
+      }
+    } catch (error) {
+      console.error("Error al traducir:", error);
+    }
+  };
+
   useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
     const initializeQuestion = () => {
       if (isCompleted) {
-        setSelected(answers.map((answer) => ({ id: answer })));
+        setSelected(answers.map((answer) => ({ id: answer, isCorrect: true })));
         setShowResult(true);
         setCompleted(true);
         setLoading(false);
@@ -66,15 +108,20 @@ const SelectQuiz = ({
       if (shuffledChoices.length > 0) {
         setLoading(false);
       }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
     };
 
     initializeQuestion();
   }, [isCompleted, choices, answers]);
 
-  const onAnswerClick = (box, obj) => {
+  const onAnswerClick = async (box, obj) => {
     updateSelected(box, obj, answers);
+    const audio = await convertToSpeech(obj.title);
+    audio.play();
   };
-
+  console.log(selected);
   const onClickSubmit = () => {
     let score = 0;
     selected.forEach((obj, index) => {
@@ -126,6 +173,10 @@ const SelectQuiz = ({
               disabled={showResult}
               answers={answers}
               isText={isText}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              refs={refs}
+              SaveAudio={SaveAudio}
             />
             <QuizBottons
               buttonName={

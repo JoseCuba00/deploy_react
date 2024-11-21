@@ -59,15 +59,7 @@ function TheoryComoponent({
 
   // Se le pone la clase ck-content para que no afecte al resto de las paginas
   return (
-    <div
-      className=" ck-content"
-      style={{
-        flex: "1",
-        position: "relative",
-        top: "108px",
-        padding: "1% 3%",
-      }}
-    >
+    <div className=" ck-content">
       <MyComponent htmlString={content} />
       <div className="ps-5 pe-5">
         <QuizBottons

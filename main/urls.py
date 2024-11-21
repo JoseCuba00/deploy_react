@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/profile_image/<int:pk>', views.ProfileImageViewUpdate.as_view(), name='profile_image_update'),
     path("ckeditor5/", include('django_ckeditor_5.urls')), # Hay que agregar esto para que la biblioteca pueda pinchar bien 
     path("upload/", views.custom_upload_function, name="custom_upload_file"),
-]
+    path("translate/", views.translate_text),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
