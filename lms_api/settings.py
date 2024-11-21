@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 YANDEX_TRANSLATE_KEY = os.getenv("YANDEX_TRANSLATE_KEY")
 ELEVEN_LABS_KEY= os.getenv("ELEVEN_LABS_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 import cloudinary_storage
