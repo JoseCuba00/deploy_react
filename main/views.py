@@ -10,7 +10,6 @@ from google.cloud import texttospeech
 import logging
 from rest_framework import generics
 from .models import Students, Module, Topics, Questions,Assignments,StudentQuestion,StudentAssignments,TheoreticalContent,StudentTheory
-from googletrans import Translator
 from django.contrib.auth.models import User
 from rest_framework import status, views
 from rest_framework.parsers import MultiPartParser, FormParser
